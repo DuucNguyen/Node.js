@@ -1,0 +1,27 @@
+{
+  "name": "node-js",
+  "version": "1.0.0",
+  "description": "node-js-learning",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DuucNguyen/Node.js.git"
+  },
+  "keywords": [
+    "nodejs",
+    "react"
+  ],
+  "author": "DucNT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DuucNguyen/Node.js/issues"
+  },
+  "homepage": "https://github.com/DuucNguyen/Node.js#readme",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
