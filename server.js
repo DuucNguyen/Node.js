@@ -2,7 +2,7 @@ const { createServer } = require("node:http"); //node.js cung cap thu vien viet 
 
 // const hostname = "127.0.0.1"; //localhost
 const hostname = "localhost"; //localhost
-const port = 6969;
+const port = 3000;
 
 const server = createServer((req, res) => {
   res.statusCode = 200;
