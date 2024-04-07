@@ -1,1 +1,19 @@
-<h1>Seach page !</h1>
+<div class="mt-5">
+  <form method="get" action="/news">
+    <div class="mb-3">
+      <label for="search-input" class="form-label">Enter value</label>
+      <input
+        type="text"
+        name="value"
+        class="form-control"
+        id="search-input"
+        aria-describedby="emailHelp"
+        placeholder="enter here"
+      />
+      <div id="emailHelp" class="form-text">We'll never share your info with
+        anyone else.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</div>

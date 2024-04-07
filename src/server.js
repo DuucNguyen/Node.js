@@ -23,14 +23,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/news", (req, res) => {
+  console.log("value: " + req.query.value);
   res.render("news");
 });
 
 app.get("/search", (req, res) => {
-  var value = req.query.q;
-  if (value.includes("ode")) {
-    console.log("->Found");
-  }
   res.render("search");
 });
 
