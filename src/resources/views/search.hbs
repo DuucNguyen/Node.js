@@ -1,5 +1,5 @@
 <div class="mt-5">
-  <form method="get" action="/news">
+  <form method="post">
     <div class="mb-3">
       <label for="search-input" class="form-label">Enter value</label>
       <input
@@ -13,7 +13,17 @@
       <div id="emailHelp" class="form-text">We'll never share your info with
         anyone else.</div>
     </div>
-
+    <div class="mb-3">
+      <label for="search-select" class="form-label">Enter value</label>
+      <select name="gender" id="search-select" class="form-select">
+        <option value="0">Pick one</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <div id="emailHelp" class="form-text">We'll never share your info with
+        anyone else.</div>
+    </div>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
 </div>

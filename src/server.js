@@ -8,6 +8,14 @@ const port = 8081;
 
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
 
+app.use(
+  express.urlencoded({
+    extended: true, //express indluded body-parser so indlude this line
+  })
+); //handler data get from form submit (work as middleware)
+
+app.use(express.json()); //handler data get from js or (XMLHttpRequest, fetch, axios, ajax, ...)
+
 // HTTP logger log the path/port the app is listening
 // app.use(morgan("combined"));
 
@@ -23,11 +31,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/news", (req, res) => {
-  console.log("value: " + req.query.value);
+  console.log("value: " + req.query.value); //req.query for param (param in URL)
   res.render("news");
 });
 
 app.get("/search", (req, res) => {
+  res.render("search");
+});
+app.post("/search", (req, res) => {
+  console.log(req.body.value); //req.body for form data (form)
   res.render("search");
 });
 
