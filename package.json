@@ -2,10 +2,11 @@
   "name": "node-js",
   "version": "1.0.0",
   "description": "node-js-learning",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js"
+    "watch": "sass --watch src/resources/scss/app.scss src/public/css/app.css",
+    "start": "nodemon --inspect src/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,12 @@
   },
   "homepage": "https://github.com/DuucNguyen/Node.js#readme",
   "dependencies": {
-    "express": "4.18.2"
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
+    "sass": "^1.74.1"
   }
 }
