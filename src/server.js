@@ -3,6 +3,9 @@ const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const path = require("path");
 
+const routes = require("./routes");
+const route = require("./routes");
+
 const app = express();
 const port = 8081;
 
@@ -25,23 +28,26 @@ app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as ht
 app.set("views", path.join(__dirname, "resources/views")); //set path to views folder (find the corresponding view and use it as view)
 // console.log(path.join("Path: " + __dirname, "resources/views"));
 
-// Define routes
-app.get("/", (req, res) => {
-  res.render("home"); //render a html code (response) as view
-});
+// //Action --> Dispatcher --> function handler
+// // Define routes
+// app.get("/", (req, res) => {
+//   res.render("home"); //render a html code (response) as view
+// });
 
-app.get("/news", (req, res) => {
-  console.log("value: " + req.query.value); //req.query for param (param in URL)
-  res.render("news");
-});
+// app.get("/news", (req, res) => {
+//   console.log("value: " + req.query.value); //req.query for param (param in URL)
+//   res.render("news");
+// });
 
-app.get("/search", (req, res) => {
-  res.render("search");
-});
-app.post("/search", (req, res) => {
-  console.log(req.body.value); //req.body for form data (form)
-  res.render("search");
-});
+// app.get("/search", (req, res) => {
+//   res.render("search");
+// });
+// app.post("/search", (req, res) => {
+//   console.log(req.body.value); //req.body for form data (form)
+//   res.render("search");
+// });
+route(app);
+//-------> routes/index/js
 
 // Listen on port
 app.listen(port, () => {
