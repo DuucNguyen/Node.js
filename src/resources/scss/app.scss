@@ -16,10 +16,9 @@ h2 {
 .card-title-wrapper {
     transition: transform 0.2s ease-in-out;
 }
-
 .card-title-wrapper:hover {
     transform: translateY(-5px); /* Adjust the value as needed */
 }
-.col-left {
-    background-color: red;
+.form-group {
+    margin-bottom: 20px;
 }

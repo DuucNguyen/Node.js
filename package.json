@@ -1,47 +1,48 @@
 {
-  "name": "node-js",
-  "version": "1.0.0",
-  "description": "node-js-learning",
-  "main": "src/server.js",
-  "scripts": {
-    "prettier": "lint-staged",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "sass --watch src/resources/scss/app.scss src/public/css/app.css",
-    "start": "nodemon --inspect src/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DuucNguyen/Node.js.git"
-  },
-  "keywords": [
-    "nodejs",
-    "react"
-  ],
-  "author": "DucNT",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DuucNguyen/Node.js/issues"
-  },
-  "homepage": "https://github.com/DuucNguyen/Node.js#readme",
-  "lint-staged": {
-    "src/**/*.{js,json,scss}": "prettier --write --single-quote --trailing-comma all --tab-width 4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "node-js",
+    "version": "1.0.0",
+    "description": "node-js-learning",
+    "main": "src/server.js",
+    "scripts": {
+        "prettier": "lint-staged",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "sass --watch src/resources/scss/app.scss src/public/css/app.css",
+        "start": "nodemon --inspect src/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DuucNguyen/Node.js.git"
+    },
+    "keywords": [
+        "nodejs",
+        "react"
+    ],
+    "author": "DucNT",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DuucNguyen/Node.js/issues"
+    },
+    "homepage": "https://github.com/DuucNguyen/Node.js#readme",
+    "lint-staged": {
+        "src/**/*.{js,json,scss}": "prettier --write --single-quote --trailing-comma all --tab-width 4"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "dependencies": {
+        "express": "^4.19.2",
+        "express-handlebars": "^7.1.2",
+        "mongoose": "^8.3.0",
+        "mongoose-slug-updater": "^3.3.0"
+    },
+    "devDependencies": {
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "morgan": "^1.10.0",
+        "nodemon": "^3.1.0",
+        "prettier": "^3.2.5",
+        "sass": "^1.74.1"
     }
-  },
-  "dependencies": {
-    "express": "^4.19.2",
-    "express-handlebars": "^7.1.2",
-    "mongoose": "^8.3.0"
-  },
-  "devDependencies": {
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
-    "morgan": "^1.10.0",
-    "nodemon": "^3.1.0",
-    "prettier": "^3.2.5",
-    "sass": "^1.74.1"
-  }
 }

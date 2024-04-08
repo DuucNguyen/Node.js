@@ -6,7 +6,6 @@ class SiteController {
         // res.render("home");
         try {
             const courses = await Courses.find().lean();
-            console.log(courses);
             res.render("home", { courses });
 
             // Courses.find({}) //promises
