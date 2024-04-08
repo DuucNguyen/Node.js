@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const newsController = require('../app/controllers/newsController'); //already included
+const newsController = require("../app/controllers/newsController"); //already included
 
-router.use('/:slug', newsController.show);
-router.use('/', newsController.index); //defaul url must be last
+router.get("/:slug", newsController.show);
+router.get("/", newsController.index); //defaul url must be last
 
 module.exports = router;

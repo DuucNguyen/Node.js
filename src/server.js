@@ -5,6 +5,10 @@ const path = require("path");
 
 const routes = require("./routes");
 const route = require("./routes");
+const db = require("./config/db");
+
+//connect db
+db.connect();
 
 const app = express();
 const port = 8081;
@@ -12,9 +16,9 @@ const port = 8081;
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
 
 app.use(
-  express.urlencoded({
-    extended: true, //express indluded body-parser so indlude this line
-  })
+    express.urlencoded({
+        extended: true, //express indluded body-parser so indlude this line
+    }),
 ); //handler data get from form submit (work as middleware)
 
 app.use(express.json()); //handler data get from js or (XMLHttpRequest, fetch, axios, ajax, ...)
@@ -25,7 +29,7 @@ app.use(express.json()); //handler data get from js or (XMLHttpRequest, fetch, a
 // Template engine setup
 app.engine(".hbs", engine({ extname: ".hbs" })); //set shorthand for handlers file for app to recognize
 app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as html or view part)
-app.set("views", path.join(__dirname, "resources/views")); //set path to views folder (find the corresponding view and use it as view)
+app.set("views", path.join(__dirname, "resources", "views")); //set path to views folder (find the corresponding view and use it as view)
 // console.log(path.join("Path: " + __dirname, "resources/views"));
 
 // //Action --> Dispatcher --> function handler
@@ -51,5 +55,5 @@ route(app);
 
 // Listen on port
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+    console.log(`App listening on port ${port}`);
 });
