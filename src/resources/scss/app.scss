@@ -1,15 +1,15 @@
-@import "variables";
+@import 'variables';
 
 h1 {
-  color: red;
+    color: red;
 }
 h2 {
-  color: $color-h2;
+    color: $color-h2;
 }
 .footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  background-color: #343a40;
-  color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
 }
