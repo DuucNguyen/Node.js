@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 h1 {
     color: red;
@@ -12,4 +12,14 @@ h2 {
     width: 100%;
     background-color: #343a40;
     color: white;
+}
+.card-title-wrapper {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card-title-wrapper:hover {
+    transform: translateY(-5px); /* Adjust the value as needed */
+}
+.col-left {
+    background-color: red;
 }

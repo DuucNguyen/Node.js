@@ -1,6 +1,8 @@
 //sinh ra de define routes
-const newsRoute = require('./news');
-const siteRoute = require('./sites');
+const newsRoute = require("./news");
+const siteRoute = require("./sites");
+const coursesRoute = require("./courses");
+
 function route(app) {
     //Action --> Dispatcher --> function handler
     // Define routes
@@ -12,10 +14,11 @@ function route(app) {
     //     console.log("value: " + req.query.value); //req.query for param (param in URL)
     //     res.render("news");
     //   });
-    app.use('/news', newsRoute);
+    app.use("/news", newsRoute);
+    app.use("/courses", coursesRoute);
     //   app.get("/search", (req, res) => {
     //     res.render("search");
     //   });
-    app.use('/', siteRoute);
+    app.use("/", siteRoute);
 }
 module.exports = route;
