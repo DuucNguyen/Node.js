@@ -23,20 +23,19 @@
                         <div
                             class="action-container d-flex justify-content-between"
                         >
-                            <button class="btn btn-success">
-                                <a
-                                    style="color: white;"
-                                    class="text-decoration-none"
-                                    href="/courses/{{_id}}/edit"
-                                >Update</a>
-                            </button>
-                            <button class="btn btn-danger">
-                                <a
-                                    style="color: white;"
-                                    class="text-decoration-none"
-                                    href="/courses/{{_id}}"
-                                >Delete</a>
-                            </button>
+                            <a
+                                style="color: white;"
+                                class="text-decoration-none btn btn-primary"
+                                href="/courses/{{_id}}/edit"
+                            >Update</a>
+                            <a
+                                style="color: white;"
+                                class="text-decoration-none btn btn-danger"
+                                href="/courses/{{_id}}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-delete-course"
+                                data-bs-whatever="{{_id}}"
+                            >Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -44,3 +43,60 @@
         </tbody>
     </table>
 </div>
+
+{{! delete-course-form }}
+<form method="post" id="delete-course-form"></form>
+
+{{! confirm delete course }}
+<div
+    class="modal fade"
+    id="modal-delete-course"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation
+                    Delete ?</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                Are u sure to delete this course ?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-course" type="button" class="btn btn-danger">Delete</button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var deleteCourseModal = document.getElementById('modal-delete-course'); 
+    var deleteCourseForm = document.getElementById("delete-course-form");
+    var btnDeleteCourse = document.getElementById("btn-delete-course");
+
+    var delete_id;
+
+    deleteCourseModal.addEventListener('show.bs.modal', function (event) { 
+        var id = event.relatedTarget; 
+        delete_id = id.getAttribute('data-bs-whatever');
+    });
+    
+    btnDeleteCourse.onclick= function(){
+        console.log(delete_id);
+        deleteCourseForm.action = "/courses/"+delete_id+"?_method=DELETE";
+        deleteCourseForm.submit();
+    };
+</script>

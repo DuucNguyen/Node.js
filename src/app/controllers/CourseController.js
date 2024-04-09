@@ -45,6 +45,13 @@ class CourseController {
             .catch(next);
         // await Courses.findOneAndUpdate(id, req.body, options);
     }
+
+    //[DELETE] /courses/:id
+    async deleteCourse(req, res, next) {
+        await Courses.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
 }
 
 module.exports = new CourseController();
