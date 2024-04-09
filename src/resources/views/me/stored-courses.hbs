@@ -1,0 +1,46 @@
+<div class="mt-4">
+    <h2>My courses</h2>
+    <table class="table table-hover mt-4">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">image</th>
+            <th scope="col">Name</th>
+            <th scope="col" colspan="2">Level</th>
+        </thead>
+        <tbody>
+            {{#each courses}}
+                <tr>
+                    <th scope="col">{{sum @index 1}}</th>
+                    <td><img
+                            style="max-width: 50%;"
+                            src="{{image}}"
+                            alt="{{name}}"
+                            class="rounded img-fluid max-width-img"
+                        /></td>
+                    <td>{{name}}</td>
+                    <td>{{level}}</td>
+                    <td>
+                        <div
+                            class="action-container d-flex justify-content-between"
+                        >
+                            <button class="btn btn-success">
+                                <a
+                                    style="color: white;"
+                                    class="text-decoration-none"
+                                    href="/courses/{{_id}}/edit"
+                                >Update</a>
+                            </button>
+                            <button class="btn btn-danger">
+                                <a
+                                    style="color: white;"
+                                    class="text-decoration-none"
+                                    href="/courses/{{_id}}"
+                                >Delete</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -9,6 +9,8 @@ const Course = new mongoose.Schema(
         image: { type: String, maxLength: 255 },
         videoID: { type: String, maxLength: 255, require: true },
         slug: { type: String, slug: "name", unique: true },
+        level: { type: String },
+
         // createdDate: { type: Date, default: Date.now },
         // updatedDate: { type: Date, default: Date.now }, -> { timestamps: true },
     },

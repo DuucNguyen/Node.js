@@ -29,6 +29,22 @@ class CourseController {
             res.status(500).json({ error: "Error saving course" });
         }
     }
+
+    //[GET] /courses/:id/edit
+    async edit(req, res, next) {
+        const course = await Courses.findById(req.params.id).lean();
+        res.render("./courses/edit", { course });
+    }
+
+    //[PUT] /courses/:id
+    async updateCourse(req, res, next) {
+        // A.findOneAndUpdate(conditions, update, options)  // returns Query
+        const id = req.params.id;
+        await Courses.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/me/stored/courses"))
+            .catch(next);
+        // await Courses.findOneAndUpdate(id, req.body, options);
+    }
 }
 
 module.exports = new CourseController();

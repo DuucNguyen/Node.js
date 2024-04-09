@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const path = require("path");
+const methodOverride = require("method-override");
 
 const routes = require("./routes");
 const route = require("./routes");
@@ -22,12 +23,21 @@ app.use(
 ); //handler data get from form submit (work as middleware)
 
 app.use(express.json()); //handler data get from js or (XMLHttpRequest, fetch, axios, ajax, ...)
+app.use(methodOverride("_method"));
 
 // HTTP logger log the path/port the app is listening
 // app.use(morgan("combined"));
 
 // Template engine setup
-app.engine(".hbs", engine({ extname: ".hbs" })); //set shorthand for handlers file for app to recognize
+app.engine(
+    ".hbs",
+    engine({
+        extname: ".hbs",
+        helpers: {
+            sum: (a, b) => a + b,
+        },
+    }),
+); //set shorthand for handlers file for app to recognize
 app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as html or view part)
 app.set("views", path.join(__dirname, "resources", "views")); //set path to views folder (find the corresponding view and use it as view)
 // console.log(path.join("Path: " + __dirname, "resources/views"));
