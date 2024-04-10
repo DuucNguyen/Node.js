@@ -8,6 +8,7 @@ router.get("/:id/edit", courseController.edit);
 router.patch("/:id/restore", courseController.restoreCourse);
 router.put("/:id", courseController.updateCourse);
 router.delete("/:id", courseController.deleteCourse);
+router.delete("/:id/force", courseController.deletePermanentCourse);
 router.get("/:slug", courseController.showDetail);
 
 module.exports = router; //-> Controller -> index

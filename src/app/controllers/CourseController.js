@@ -23,7 +23,7 @@ class CourseController {
             const newCourse = new Courses(formData);
             await newCourse.save();
 
-            res.redirect("/");
+            res.redirect("/me/stored/courses");
         } catch (error) {
             console.error("Error saving course:", error);
             res.status(500).json({ error: "Error saving course" });
@@ -48,7 +48,13 @@ class CourseController {
 
     //[DELETE] /courses/:id
     async deleteCourse(req, res, next) {
-        await Courses.delete({ _id: req.params.id })
+        await Courses.delete({ _id: req.params.id }) //delete plugin (soft delete)
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+    //[DELETE] /courses/:id/force
+    async deletePermanentCourse(req, res, next) {
+        await Courses.deleteOne({ _id: req.params.id }) //delete mongoose (force delete)
             .then(() => res.redirect("back"))
             .catch(next);
     }

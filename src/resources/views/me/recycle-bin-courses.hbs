@@ -95,7 +95,7 @@
                     id="btn-restore-course"
                     type="button"
                     class="btn btn-success"
-                >Restore</button>
+                ><i class="fa-solid fa-trash-can-arrow-up"></i> Restore</button>
                 <button
                     type="button"
                     class="btn btn-secondary"
@@ -129,15 +129,21 @@
                     aria-label="Close"
                 ></button>
             </div>
-            <div class="modal-body">
-                Are u sure to delete this course ?
+            <div class="modal-body text-center">
+                <div class="text-center" style="color: red;"><i
+                        class="fa-solid fa-triangle-exclamation fa-2xl m-4 fs-1"
+                    ></i>
+                    <h4>
+                        By doing this action, this course will be removed
+                        permanent form the system.</h4></div>
+                <h6>Are you sure to continues ?</h6>
             </div>
             <div class="modal-footer">
                 <button
                     id="btn-delete-course"
                     type="button"
                     class="btn btn-danger"
-                >Delete </button>
+                ><i class="fa-regular fa-trash-can"></i> Delete</button>
                 <button
                     type="button"
                     class="btn btn-secondary"
@@ -166,5 +172,5 @@
     (event) { var id = event.relatedTarget; delete_id =
     id.getAttribute('data-bs-whatever'); }); btnDeleteCourse.onclick=
     function(){ deleteCourseForm.action =
-    "/courses/"+delete_id+"?_method=DELETE"; };
+    "/courses/"+delete_id+"/force?_method=DELETE";deleteCourseForm.submit() };
 </script>
