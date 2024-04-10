@@ -1,32 +1,32 @@
 <div class="mt-4">
     <div class="d-flex justify-content-between">
-        <h2>My courses</h2>
+        <h2>My courses ({{countCourses}})</h2>
         <h2><a class="btn btn-outline-success" href="/me/bin/courses"><i
                     class="fa-solid fa-recycle"
-                ></i><span> Recycle bin</span></a></h2>
+                ></i><span> Recycle bin ({{countDeleted}})</span></a></h2>
     </div>
     <table class="table table-hover mt-4">
         <thead>
             <th scope="col">#</th>
             <th scope="col">image</th>
             <th scope="col">Name</th>
-            <th scope="col" colspan="2">Level</th>
+            <th scope="col" colspan="2">Last Modified</th>
         </thead>
         <tbody>
             {{#each courses}}
                 <tr>
                     <th scope="col">{{sum @index 1}}</th>
-                    <td><img
+                    <td style="max-width: 200px;"><img
                             style="max-width: 50%;"
                             src="{{image}}"
                             alt="{{name}}"
                             class="rounded img-fluid max-width-img"
                         /></td>
                     <td>{{name}}</td>
-                    <td>{{level}}</td>
+                    <td>{{dateFormat updatedAt "MMMM Do YYYY, h:mm:ss a"}}</td>
                     <td>
                         <div
-                            class="action-container d-flex justify-content-between"
+                            class="action-container d-flex justify-content-evenly"
                         >
                             <a
                                 class="text-decoration-none btn btn-outline-primary"

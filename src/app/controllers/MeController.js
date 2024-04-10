@@ -2,8 +2,31 @@ const Courses = require("../models/Courses");
 class MeController {
     //[GET] me/stored/courses
     async storedCourses(req, res, next) {
-        const courses = await Courses.find().lean();
-        res.render("./me/stored-courses", { courses });
+        //promise - each promises cannot pass multiple variables
+        //=> use distructuring pattern (multiple promises)
+        Promise.all([
+            Courses.find().lean(),
+            Courses.countDocumentsDeleted(),
+            Courses.countDocumentsWithDeleted(),
+        ]) //receive multiple promises
+            .then(
+                (
+                    [courses, countDeleted, countCourses], //receive array of return values of corresponding promise
+                ) =>
+                    res.render("./me/stored-courses", {
+                        countCourses,
+                        countDeleted,
+                        courses,
+                    }),
+            )
+            .catch(next);
+        // await Courses.countDocumentsDeleted().then((countDeleted) =>
+        //     console.log(countDeleted),
+        // );
+        // await Courses.find()
+        //     .lean()
+        //     .then((courses) => res.render("./me/stored-courses", { courses }))
+        //     .catch(next);
     }
     //[GET] me/stored/news
     async storedNews(req, res, next) {

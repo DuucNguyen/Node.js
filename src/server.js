@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
+const handlebars = require("handlebars");
+const dateFormat = require("handlebars-dateformat");
 const path = require("path");
 const methodOverride = require("method-override");
 
@@ -38,6 +40,7 @@ app.engine(
         },
     }),
 ); //set shorthand for handlers file for app to recognize
+handlebars.registerHelper("dateFormat", dateFormat); //register date format helper
 app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as html or view part)
 app.set("views", path.join(__dirname, "resources", "views")); //set path to views folder (find the corresponding view and use it as view)
 // console.log(path.join("Path: " + __dirname, "resources/views"));
