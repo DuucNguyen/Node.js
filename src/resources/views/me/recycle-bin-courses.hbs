@@ -1,0 +1,170 @@
+<div class="mt-4">
+    <div>
+        <h5>
+            <a class="text-muted" href="/me/stored/courses"><i
+                    class="fa-regular fa-circle-left"
+                ></i><span>
+                    Go back to Courses</span></a></h5>
+        <h2>Recycle bin</h2>
+    </div>
+
+    <table class="table table-hover mt-4">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col" colspan="2">Level</th>
+        </thead>
+        <tbody>
+            {{#each courses}}
+                <tr>
+                    <th scope="col">{{sum @index 1}}</th>
+                    <td><img
+                            style="max-width: 50%;"
+                            src="{{image}}"
+                            alt="{{name}}"
+                            class="rounded img-fluid max-width-img"
+                        /></td>
+                    <td>{{name}}</td>
+                    <td>{{level}}</td>
+                    <td>
+                        <div
+                            class="action-container d-flex justify-content-between"
+                        >
+                            <a
+                                class="text-decoration-none btn btn-outline-success"
+                                href="/courses/{{_id}}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-restore-course"
+                                data-bs-whatever="{{_id}}"
+                            ><span><i
+                                        class="fa-solid fa-trash-can-arrow-up"
+                                    ></i>
+                                    Restore</span></a>
+                            <a
+                                class="text-decoration-none btn btn-outline-danger"
+                                href="/courses/{{_id}}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-delete-course"
+                                data-bs-whatever="{{_id}}"
+                            ><span><i class="fa-solid fa-trash-can"></i>
+                                    Permanent Delete</span></a>
+                        </div>
+                    </td>
+                </tr>
+            {{else}}
+                <tr class="text-center">
+                    <td colspan="5">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>No courses to display</span>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{! restore-course-form }}
+<form method="post" id="restore-course-form"></form>
+
+{{! confirm restore course }}
+<div
+    class="modal fade"
+    id="modal-restore-course"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation
+                    Restore ?</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                Are you sure to restore this course ?
+            </div>
+            <div class="modal-footer">
+                <button
+                    id="btn-restore-course"
+                    type="button"
+                    class="btn btn-success"
+                >Restore</button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! delete-course-form }}
+<form method="post" id="delete-course-form"></form>
+
+{{! confirm delete course }}
+<div
+    class="modal fade"
+    id="modal-delete-course"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation
+                    Delete ?</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                Are u sure to delete this course ?
+            </div>
+            <div class="modal-footer">
+                <button
+                    id="btn-delete-course"
+                    type="button"
+                    class="btn btn-danger"
+                >Delete </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var restoreCourseModal = document.getElementById('modal-restore-course');
+    var restoreCourseForm = document.getElementById("restore-course-form"); var
+    btnRestoreCourse = document.getElementById("btn-restore-course"); var
+    restore_id= restoreCourseModal.addEventListener('show.bs.modal', function
+    (event) { var id = event.relatedTarget; restore_id =
+    id.getAttribute('data-bs-whatever'); }); btnRestoreCourse.onclick=
+    function(){ restoreCourseForm.action =
+    "/courses/"+restore_id+"/restore?_method=PATCH"; restoreCourseForm.submit()
+    }; var deleteCourseModal = document.getElementById('modal-delete-course');
+    var deleteCourseForm = document.getElementById("delete-course-form"); var
+    btnDeleteCourse = document.getElementById("btn-delete-course"); var
+    delete_id; deleteCourseModal.addEventListener('show.bs.modal', function
+    (event) { var id = event.relatedTarget; delete_id =
+    id.getAttribute('data-bs-whatever'); }); btnDeleteCourse.onclick=
+    function(){ deleteCourseForm.action =
+    "/courses/"+delete_id+"?_method=DELETE"; };
+</script>

@@ -1,27 +1,18 @@
 @import "variables";
 
-h1 {
-    color: red;
-}
-h2 {
-    color: $color-h2;
-}
-.footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    background-color: #343a40;
-    color: white;
-}
+//[Home]
 .card-title-wrapper {
     transition: transform 0.2s ease-in-out;
 }
 .card-title-wrapper:hover {
     transform: translateY(-5px); /* Adjust the value as needed */
 }
+//[create courses/update courses]
 .form-group {
     margin-bottom: 20px;
 }
+//[me/courses]
 .max-width-img {
     max-width: 50%;
 }
+//recycle bin

@@ -1,5 +1,10 @@
 <div class="mt-4">
-    <h2>My courses</h2>
+    <div class="d-flex justify-content-between">
+        <h2>My courses</h2>
+        <h2><a class="btn btn-outline-success" href="/me/bin/courses"><i
+                    class="fa-solid fa-recycle"
+                ></i><span> Recycle bin</span></a></h2>
+    </div>
     <table class="table table-hover mt-4">
         <thead>
             <th scope="col">#</th>
@@ -24,19 +29,27 @@
                             class="action-container d-flex justify-content-between"
                         >
                             <a
-                                style="color: white;"
-                                class="text-decoration-none btn btn-primary"
+                                class="text-decoration-none btn btn-outline-primary"
                                 href="/courses/{{_id}}/edit"
-                            >Update</a>
+                            ><span><i class="fa-solid fa-pen-to-square"></i>
+                                    Update</span></a>
                             <a
-                                style="color: white;"
-                                class="text-decoration-none btn btn-danger"
+                                class="text-decoration-none btn btn-outline-danger"
                                 href="/courses/{{_id}}"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modal-delete-course"
                                 data-bs-whatever="{{_id}}"
-                            >Delete</a>
+                            ><span><i class="fa-regular fa-trash-can"></i>
+                                    Delete</span></a>
                         </div>
+                    </td>
+                </tr>
+            {{else}}
+                <tr class="text-center">
+                    <td colspan="5">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>No course to display</span>
+                        <a href="/courses/create">Create a new Course</a>
                     </td>
                 </tr>
             {{/each}}
@@ -71,7 +84,11 @@
                 Are u sure to delete this course ?
             </div>
             <div class="modal-footer">
-                <button id="btn-delete-course" type="button" class="btn btn-danger">Delete</button>
+                <button
+                    id="btn-delete-course"
+                    type="button"
+                    class="btn btn-danger"
+                >Delete</button>
                 <button
                     type="button"
                     class="btn btn-secondary"
@@ -83,20 +100,12 @@
 </div>
 
 <script>
-    var deleteCourseModal = document.getElementById('modal-delete-course'); 
-    var deleteCourseForm = document.getElementById("delete-course-form");
-    var btnDeleteCourse = document.getElementById("btn-delete-course");
-
-    var delete_id;
-
-    deleteCourseModal.addEventListener('show.bs.modal', function (event) { 
-        var id = event.relatedTarget; 
-        delete_id = id.getAttribute('data-bs-whatever');
-    });
-    
-    btnDeleteCourse.onclick= function(){
-        console.log(delete_id);
-        deleteCourseForm.action = "/courses/"+delete_id+"?_method=DELETE";
-        deleteCourseForm.submit();
-    };
+    var deleteCourseModal = document.getElementById('modal-delete-course'); var
+    deleteCourseForm = document.getElementById("delete-course-form"); var
+    btnDeleteCourse = document.getElementById("btn-delete-course"); var
+    delete_id; deleteCourseModal.addEventListener('show.bs.modal', function
+    (event) { var id = event.relatedTarget; delete_id =
+    id.getAttribute('data-bs-whatever'); }); btnDeleteCourse.onclick=
+    function(){ deleteCourseForm.action =
+    "/courses/"+delete_id+"?_method=DELETE"; deleteCourseForm.submit(); };
 </script>

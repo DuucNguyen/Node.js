@@ -48,7 +48,23 @@ class CourseController {
 
     //[DELETE] /courses/:id
     async deleteCourse(req, res, next) {
-        await Courses.deleteOne({ _id: req.params.id })
+        await Courses.delete({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    //[PATCH] /courses/:id/restore
+    async restoreCourse(req, res, next) {
+        // const id = req.params.id;
+        // await Courses.restore({ _id: id }) //restore doest not change deleted: false but remove deleted
+        //     .catch(next);
+        //     .then(() => res.redirect("back"))
+        const id = req.params.id;
+        const courses = await Courses.findOneAndUpdateDeleted(
+            { _id: id },
+            { deleted: false },
+        )
+            .lean()
             .then(() => res.redirect("back"))
             .catch(next);
     }

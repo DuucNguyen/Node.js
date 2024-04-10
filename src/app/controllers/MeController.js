@@ -9,6 +9,13 @@ class MeController {
     async storedNews(req, res, next) {
         res.render("stored News");
     }
+
+    //[GET] me/bin/courses
+    async deletedCourses(req, res, next) {
+        const id = req.params.id;
+        const courses = await Courses.findDeleted().lean();
+        res.render("./me/recycle-bin-courses", { courses });
+    }
 }
 
 module.exports = new MeController();
