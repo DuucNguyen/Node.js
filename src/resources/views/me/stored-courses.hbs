@@ -5,6 +5,8 @@
                     class="fa-solid fa-recycle"
                 ></i><span> Recycle bin ({{countDeleted}})</span></a></h2>
     </div>
+    <input onclick="selectAll()" type="checkbox" name="" id="check-all" />
+    <label for="check-box-all">Select All</label>
     <table class="table table-hover mt-4">
         <thead>
             <th scope="col">#</th>
@@ -15,7 +17,11 @@
         <tbody>
             {{#each courses}}
                 <tr>
-                    <th scope="col">{{sum @index 1}}</th>
+                    <th scope="col"><input
+                            type="checkbox"
+                            id="check-box-{{_id}}"
+                        />
+                        {{sum @index 1}}</th>
                     <td style="max-width: 200px;"><img
                             style="max-width: 50%;"
                             src="{{image}}"
@@ -107,4 +113,14 @@
     id.getAttribute('data-bs-whatever'); }); btnDeleteCourse.onclick=
     function(){ deleteCourseForm.action =
     "/courses/"+delete_id+"?_method=DELETE"; deleteCourseForm.submit(); };
+    function selectAll() { var checkAll_btn =
+    document.getElementById("check-all"); var courses_checkbox =
+    document.querySelectorAll('[id^="check-box-"]');
+    if(checkAll_btn.checked=true){ courses_checkbox.forEach(e => { e.checked =
+    true; }); } else{ courses_checkbox.forEach(e => { e.checked = false; }); }
+    for(let i =0;i<courses_checkbox.length;i++){
+    courses_checkbox[i].addEventListener("DOMContentLoad", function(){
+    console.log(courses_checkbox[i]); if(courses_checkbox[i].cheked=false){
+    checkAll_btn.checked=false; } }); } }
+
 </script>
