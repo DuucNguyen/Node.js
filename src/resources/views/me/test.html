@@ -1,0 +1,27 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            var deleteCourseModal = document.getElementById("modal-delete-course");
+            var deleteCourseForm = document.getElementById("delete-course-form");
+            var btnDeleteCourse = document.getElementById("btn-delete-course");
+            var delete_id;
+            deleteCourseModal.addEventListener("show.bs.modal", function (event) {
+                var id = event.relatedTarget;
+                delete_id = id.getAttribute("data-bs-whatever");
+            });
+            btnDeleteCourse.onclick = function () {
+                deleteCourseForm.action = "/courses/" + delete_id + "?_method=DELETE";
+                deleteCourseForm.submit();
+            };
+            document.addEventListener("DOMContentLoaded", function () {
+                var checkboxAll = $("#checkbox-all");
+                checkboxAll.change(function () {});
+            });
+        </script>
+    </body>
+</html>

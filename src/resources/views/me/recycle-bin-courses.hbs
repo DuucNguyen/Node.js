@@ -27,20 +27,16 @@
                         /></td>
                     <td>{{name}}</td>
                     <td>{{dateFormat deletedAt "MMMM Do YYYY, h:mm:ss a"}}</td>
-                    //using dateformat helper
+                    {{! //using dateformat helper }}
                     <td>
-                        <div
-                            class="action-container d-flex justify-content-evenly"
-                        >
+                        <div class="action-container d-flex justify-content-evenly">
                             <a
                                 class="text-decoration-none btn btn-outline-success"
                                 href="/courses/{{_id}}"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modal-restore-course"
                                 data-bs-whatever="{{_id}}"
-                            ><span><i
-                                        class="fa-solid fa-trash-can-arrow-up"
-                                    ></i>
+                            ><span><i class="fa-solid fa-trash-can-arrow-up"></i>
                                     Restore</span></a>
                             <a
                                 class="text-decoration-none btn btn-outline-danger"
@@ -79,8 +75,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmation
-                    Restore ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation Restore ?</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -92,11 +87,10 @@
                 Are you sure to restore this course ?
             </div>
             <div class="modal-footer">
-                <button
-                    id="btn-restore-course"
-                    type="button"
-                    class="btn btn-success"
-                ><i class="fa-solid fa-trash-can-arrow-up"></i> Restore</button>
+                <button id="btn-restore-course" type="button" class="btn btn-success"><i
+                        class="fa-solid fa-trash-can-arrow-up"
+                    ></i>
+                    Restore</button>
                 <button
                     type="button"
                     class="btn btn-secondary"
@@ -121,8 +115,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmation
-                    Delete ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation Delete ?</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -135,21 +128,15 @@
                         class="fa-solid fa-triangle-exclamation fa-2xl m-4 fs-1"
                     ></i>
                     <h4>
-                        By doing this action, this course will be removed
-                        permanent form the system.</h4></div>
+                        By doing this action, this course will be removed permanent form the system.</h4></div>
                 <h6>Are you sure to continues ?</h6>
             </div>
             <div class="modal-footer">
-                <button
-                    id="btn-delete-course"
-                    type="button"
-                    class="btn btn-danger"
-                ><i class="fa-regular fa-trash-can"></i> Delete</button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                >Cancel
+                <button id="btn-delete-course" type="button" class="btn btn-danger"><i
+                        class="fa-regular fa-trash-can"
+                    ></i>
+                    Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
                 </button>
             </div>
         </div>
@@ -159,19 +146,32 @@
 <script>
 
     var restoreCourseModal = document.getElementById('modal-restore-course');
-    var restoreCourseForm = document.getElementById("restore-course-form"); var
-    btnRestoreCourse = document.getElementById("btn-restore-course"); var
-    restore_id= restoreCourseModal.addEventListener('show.bs.modal', function
-    (event) { var id = event.relatedTarget; restore_id =
-    id.getAttribute('data-bs-whatever'); }); btnRestoreCourse.onclick=
-    function(){ restoreCourseForm.action =
-    "/courses/"+restore_id+"/restore?_method=PATCH"; restoreCourseForm.submit()
-    }; var deleteCourseModal = document.getElementById('modal-delete-course');
-    var deleteCourseForm = document.getElementById("delete-course-form"); var
-    btnDeleteCourse = document.getElementById("btn-delete-course"); var
-    delete_id; deleteCourseModal.addEventListener('show.bs.modal', function
-    (event) { var id = event.relatedTarget; delete_id =
-    id.getAttribute('data-bs-whatever'); }); btnDeleteCourse.onclick=
-    function(){ deleteCourseForm.action =
-    "/courses/"+delete_id+"/force?_method=DELETE";deleteCourseForm.submit() };
+    var restoreCourseForm = document.getElementById("restore-course-form");
+    var btnRestoreCourse = document.getElementById("btn-restore-course");
+    var restore_id;
+
+    restoreCourseModal.addEventListener('show.bs.modal', function (event) {
+        var id = event.relatedTarget;
+        restore_id = id.getAttribute('data-bs-whatever'); 
+    });
+
+    btnRestoreCourse.onclick= function(){ 
+        restoreCourseForm.action = "/courses/"+restore_id+"/restore?_method=PATCH";
+        restoreCourseForm.submit() 
+    };
+    
+    var deleteCourseModal = document.getElementById('modal-delete-course');
+    var deleteCourseForm = document.getElementById("delete-course-form");
+    var btnDeleteCourse = document.getElementById("btn-delete-course");
+    var delete_id;
+    
+    deleteCourseModal.addEventListener('show.bs.modal', function (event) {
+        var id = event.relatedTarget;
+        delete_id = id.getAttribute('data-bs-whatever'); 
+    });
+
+    btnDeleteCourse.onclick= function(){ 
+        deleteCourseForm.action = "/courses/"+delete_id+"/force?_method=DELETE";
+        deleteCourseForm.submit() 
+    };
 </script>

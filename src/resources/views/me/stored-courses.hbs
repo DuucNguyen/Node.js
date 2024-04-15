@@ -1,52 +1,98 @@
-<div class="mt-4">
+<form class="mt-4" name="container-form" method="POST" action="/courses/handle-form-action">
     <div class="d-flex justify-content-between">
-        <h2>My courses ({{countCourses}})</h2>
-        <h2><a class="btn btn-outline-success" href="/me/bin/courses"><i
-                    class="fa-solid fa-recycle"
-                ></i><span> Recycle bin ({{countDeleted}})</span></a></h2>
+        <h2>
+            My courses ({{countCourses}})
+        </h2>
+        <h2>
+            <a class="btn btn-outline-success" href="/me/bin/courses">
+                <i class="fa-solid fa-recycle"></i>
+                <span>
+                    Recycle bin ({{countDeleted}})
+                </span>
+            </a>
+        </h2>
     </div>
-    <input onclick="selectAll()" type="checkbox" name="" id="check-all" />
-    <label for="check-box-all">Select All</label>
+    <div class="form-check mt-4 d-flex align-items-center">
+        <input class="form-check-input" type="checkbox" value="" id="checkbox-all" title="Select" />
+        <label class="form-check-label ms-2 me-2" for="checkbox-all">
+            Select all
+        </label>
+
+        <div class="actions-container ms-3">
+            <button type="submit" class="btn btn-danger disabled action-delete-btn" title="Move to bin">
+                <i class="fa-regular fa-trash-can"></i>
+            </button>
+        </div>
+    </div>
     <table class="table table-hover mt-4">
         <thead>
-            <th scope="col">#</th>
-            <th scope="col">image</th>
-            <th scope="col">Name</th>
-            <th scope="col" colspan="2">Last Modified</th>
+            <th scope="col" colspan="2">
+                #
+            </th>
+            <th scope="col">
+                image
+            </th>
+            <th scope="col">
+                Name
+            </th>
+            <th scope="col" colspan="2">
+                Last Modified
+            </th>
         </thead>
         <tbody>
             {{#each courses}}
                 <tr>
-                    <th scope="col"><input
-                            type="checkbox"
-                            id="check-box-{{_id}}"
-                        />
-                        {{sum @index 1}}</th>
-                    <td style="max-width: 200px;"><img
+                    <td>
+                        <div>
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="checkboxNoLabel"
+                                name="courseIds[]"
+                                value="{{_id}}"
+                                aria-label="..."
+                            />
+
+                        </div>
+                    </td>
+                    <th>{{sum @index 1}}</th>
+                    <td style="max-width: 200px;">
+                        <img
                             style="max-width: 50%;"
                             src="{{image}}"
                             alt="{{name}}"
                             class="rounded img-fluid max-width-img"
-                        /></td>
-                    <td>{{name}}</td>
-                    <td>{{dateFormat updatedAt "MMMM Do YYYY, h:mm:ss a"}}</td>
+                        />
+                    </td>
                     <td>
-                        <div
-                            class="action-container d-flex justify-content-evenly"
-                        >
+                        {{name}}
+                    </td>
+                    <td>
+                        {{dateFormat updatedAt "MMMM Do YYYY, h:mm:ss a"}}
+                    </td>
+                    <td>
+                        <div class="action-container d-flex justify-content-evenly">
                             <a
                                 class="text-decoration-none btn btn-outline-primary"
                                 href="/courses/{{_id}}/edit"
-                            ><span><i class="fa-solid fa-pen-to-square"></i>
-                                    Update</span></a>
+                            >
+                                <span>
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Update
+                                </span>
+                            </a>
                             <a
                                 class="text-decoration-none btn btn-outline-danger"
                                 href="/courses/{{_id}}"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modal-delete-course"
                                 data-bs-whatever="{{_id}}"
-                            ><span><i class="fa-regular fa-trash-can"></i>
-                                    Delete</span></a>
+                            >
+                                <span>
+                                    <i class="fa-regular fa-trash-can"></i>
+                                    Move to bin
+                                </span>
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -54,14 +100,18 @@
                 <tr class="text-center">
                     <td colspan="5">
                         <i class="fa-solid fa-circle-info"></i>
-                        <span>No course to display</span>
-                        <a href="/courses/create">Create a new Course</a>
+                        <span>
+                            No course to display
+                        </span>
+                        <a href="/courses/create">
+                            Create a new Course
+                        </a>
                     </td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 {{! delete-course-form }}
 <form method="post" id="delete-course-form"></form>
@@ -77,7 +127,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Move to bin ?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Move to bin ?
+                </h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -89,38 +141,75 @@
                 Are u sure to move this course to bin ?
             </div>
             <div class="modal-footer">
-                <button
-                    id="btn-delete-course"
-                    type="button"
-                    class="btn btn-danger"
-                ><i class="fa-regular fa-trash-can"></i> Move to bin</button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                >Cancel</button>
+                <button id="btn-delete-course" type="button" class="btn btn-danger">
+                    <i class="fa-regular fa-trash-can"></i>
+                    Move to bin
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    var deleteCourseModal = document.getElementById('modal-delete-course'); var
-    deleteCourseForm = document.getElementById("delete-course-form"); var
-    btnDeleteCourse = document.getElementById("btn-delete-course"); var
-    delete_id; deleteCourseModal.addEventListener('show.bs.modal', function
-    (event) { var id = event.relatedTarget; delete_id =
-    id.getAttribute('data-bs-whatever'); }); btnDeleteCourse.onclick=
-    function(){ deleteCourseForm.action =
-    "/courses/"+delete_id+"?_method=DELETE"; deleteCourseForm.submit(); };
-    function selectAll() { var checkAll_btn =
-    document.getElementById("check-all"); var courses_checkbox =
-    document.querySelectorAll('[id^="check-box-"]');
-    if(checkAll_btn.checked=true){ courses_checkbox.forEach(e => { e.checked =
-    true; }); } else{ courses_checkbox.forEach(e => { e.checked = false; }); }
-    for(let i =0;i<courses_checkbox.length;i++){
-    courses_checkbox[i].addEventListener("DOMContentLoad", function(){
-    console.log(courses_checkbox[i]); if(courses_checkbox[i].cheked=false){
-    checkAll_btn.checked=false; } }); } }
+    var deleteCourseModal = document.getElementById("modal-delete-course");
+    var deleteCourseForm = document.getElementById("delete-course-form");
+    var btnDeleteCourse = document.getElementById("btn-delete-course");
+    var delete_id;
+    
+    deleteCourseModal.addEventListener("show.bs.modal", function (event) {
+        var id = event.relatedTarget;
+        delete_id = id.getAttribute("data-bs-whatever"); 
+    });
 
+    btnDeleteCourse.onclick = function () {
+         deleteCourseForm.action = "/courses/" + delete_id + "?_method=DELETE"; deleteCourseForm.submit();
+    }; 
+
+
+    document.addEventListener("DOMContentLoaded",function () {
+        var checkboxAll = $("#checkbox-all"); //select-all-btn
+        var courseIdCheckBox  = $("input[name = 'courseIds[]']");
+        var action_delete_action = $(".action-delete-btn");
+        var checkboxAll = $("#checkbox-all"); //select-all-btn
+        var containerForm = document.forms["container-form"];
+        //Select all change
+        checkboxAll.change(function () {
+            var isCheckedAll = checkboxAll.prop('checked'); //property Checked of select-all-btn
+            courseIdCheckBox.prop('checked',isCheckedAll); //set property Checked of all check box
+            renderDeleteAllAction();
+
+        });
+
+        //Single checkbox change
+        courseIdCheckBox.change(function(){
+            var isCheckedAll = courseIdCheckBox.length === $("input[name = 'courseIds[]']:checked").length;  //compare all vs checked
+            checkboxAll.prop("checked", isCheckedAll); //set property Checked of select-all-btn
+            renderDeleteAllAction();
+        });
+
+        //Re-render check all actions
+        function renderDeleteAllAction(){
+            var checkedCourses = $("input[name = 'courseIds[]']:checked").length;
+            if(checkedCourses>0){
+                console.log(action_delete_action);
+                action_delete_action.removeClass('disabled');
+            }else{
+                action_delete_action.addClass('disabled');
+            }
+        }
+
+        action_delete_action.click(function(e){
+            e.preventDefault();
+            var isSumittable = !$(this).hasClass("disabled");
+            if(isSumittable){
+                containerForm.submit();
+            }
+        });
+
+        console.log(containerForm);
+        
+    });
 </script>

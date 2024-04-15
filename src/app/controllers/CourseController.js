@@ -48,7 +48,7 @@ class CourseController {
 
     //[DELETE] /courses/:id
     async deleteCourse(req, res, next) {
-        await Courses.delete({ _id: req.params.id }) //delete plugin (soft delete)
+        await Courses.delete({ _id: req.params.id }) // "delete plugin" (soft delete)
             .then(() => res.redirect("back"))
             .catch(next);
     }
@@ -66,11 +66,14 @@ class CourseController {
         //     .catch(next);
         //     .then(() => res.redirect("back"))
         const id = req.params.id;
-        const courses = await Courses.findOneAndUpdateDeleted(
-            { _id: id },
-            { deleted: false },
-        )
+        const courses = await Courses.findOneAndUpdateDeleted({ _id: id }, { deleted: false })
             .lean()
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+    //[POST] /courses/handle-form-action
+    async handleFormAction(req, res, next) {
+        await Courses.delete({ _id: { $in: req.body.courseIds } }) //delete plugin (soft delete)
             .then(() => res.redirect("back"))
             .catch(next);
     }
