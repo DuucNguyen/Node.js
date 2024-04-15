@@ -7,7 +7,7 @@ class MeController {
         Promise.all([
             Courses.find().lean(),
             Courses.countDocumentsDeleted(),
-            Courses.countDocumentsWithDeleted(),
+            Courses.countDocuments(),
         ]) //receive multiple promises
             .then(
                 (
@@ -35,9 +35,22 @@ class MeController {
 
     //[GET] me/bin/courses
     async deletedCourses(req, res, next) {
-        const id = req.params.id;
-        const courses = await Courses.findDeleted().lean();
-        res.render("./me/recycle-bin-courses", { courses });
+        Promise.all([
+            Courses.findDeleted().lean(),
+            Courses.countDocumentsDeleted(),
+            Courses.countDocuments(),
+        ]) //receive multiple promises
+            .then(
+                (
+                    [courses, countDeleted, countCourses], //receive array of return values of corresponding promise
+                ) =>
+                    res.render("./me/recycle-bin-courses", {
+                        countCourses,
+                        countDeleted,
+                        courses,
+                    }),
+            )
+            .catch(next);
     }
 }
 

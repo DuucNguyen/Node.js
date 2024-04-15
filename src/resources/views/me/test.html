@@ -10,17 +10,56 @@
             var deleteCourseForm = document.getElementById("delete-course-form");
             var btnDeleteCourse = document.getElementById("btn-delete-course");
             var delete_id;
+
             deleteCourseModal.addEventListener("show.bs.modal", function (event) {
                 var id = event.relatedTarget;
                 delete_id = id.getAttribute("data-bs-whatever");
             });
+
             btnDeleteCourse.onclick = function () {
                 deleteCourseForm.action = "/courses/" + delete_id + "?_method=DELETE";
                 deleteCourseForm.submit();
             };
+
             document.addEventListener("DOMContentLoaded", function () {
-                var checkboxAll = $("#checkbox-all");
-                checkboxAll.change(function () {});
+                var checkboxAll = $("#checkbox-all"); //select-all-btn
+                var courseIdCheckBox = $("input[name = 'courseIds[]']");
+                var action_delete_action = $(".action-delete-btn");
+                var checkboxAll = $("#checkbox-all"); //select-all-btn
+                var containerForm = document.forms["container-form"];
+                //Select all change
+                checkboxAll.change(function () {
+                    var isCheckedAll = checkboxAll.prop("checked"); //property Checked of select-all-btn
+                    courseIdCheckBox.prop("checked", isCheckedAll); //set property Checked of all check box
+                    renderDeleteAllAction();
+                });
+
+                //Single checkbox change
+                courseIdCheckBox.change(function () {
+                    var isCheckedAll =
+                        courseIdCheckBox.length === $("input[name = 'courseIds[]']:checked").length; //compare all vs checked
+                    checkboxAll.prop("checked", isCheckedAll); //set property Checked of select-all-btn
+                    renderDeleteAllAction();
+                });
+
+                //Re-render check all actions
+                function renderDeleteAllAction() {
+                    var checkedCourses = $("input[name = 'courseIds[]']:checked").length;
+                    if (checkedCourses > 0) {
+                        console.log(action_delete_action);
+                        action_delete_action.removeClass("disabled");
+                    } else {
+                        action_delete_action.addClass("disabled");
+                    }
+                }
+
+                action_delete_action.click(function (e) {
+                    e.preventDefault();
+                    var isSumittable = !$(this).hasClass("disabled");
+                    if (isSumittable) {
+                        containerForm.submit();
+                    }
+                });
             });
         </script>
     </body>

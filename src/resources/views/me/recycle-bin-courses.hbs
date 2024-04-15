@@ -1,65 +1,133 @@
-<div class="mt-4">
-    <div>
-        <h5>
-            <a class="text-muted" href="/me/stored/courses"><i
-                    class="fa-regular fa-circle-left"
-                ></i><span>
-                    Go back to Courses</span></a></h5>
-        <h2>Recycle bin</h2>
+<form
+    class="mt-4 d-flex justify-content-between"
+    name="container-form"
+    method="POST"
+    action="/courses/handle-form-action"
+>
+    <div class="sidebar-container">
+        <div class="sidebar-my-courses d-flex align-items-center fs-5 fw-bold">
+            <div class="courses-count-statistic">
+                <span class="m-2">
+                    Create new course
+                </span>
+            </div>
+            <span class="courses-count text-center p-2 ms-2">
+                <a style="color: white;" class="text-decoration-none" href="/courses/create"><i
+                        class="fa-solid fa-plus"
+                    ></i></a>
+            </span>
+        </div>
+        <div class="mt-3 sidebar-item">
+            <span class="">
+                <a
+                    href="/me/stored/courses"
+                    class="text-decoration-none d-flex justify-content-between"
+                >
+                    <span>
+                        <i class="fa-solid fa-window-restore me-3"></i>
+                        Total Courses
+                    </span>
+                    <span>
+                        {{countCourses}}
+                    </span>
+                </a>
+            </span>
+        </div>
+        <div class="mt-3 sidebar-item sidebar-item-colorred">
+            <span class="fs-5 fw-bold">
+                <a
+                    href="/me/bin/courses"
+                    class="text-decoration-none d-flex justify-content-between"
+                >
+                    <span>
+                        <i class="fa-solid fa-recycle me-3"></i>
+                        Recycle bin
+                    </span>
+                    <span>
+                        {{countDeleted}}
+                    </span>
+                </a>
+            </span>
+        </div>
     </div>
+    <div class="col-lg-9 main-content-container">
+        <div class="form-check d-flex align-items-center content-head">
+            <input
+                class="form-check-input ms-3"
+                type="checkbox"
+                value=""
+                id="checkbox-all"
+                title="Select"
+            />
+            <label class="form-check-label ms-2 me-2" for="checkbox-all">
+                Select all
+            </label>
 
-    <table class="table table-hover mt-4">
-        <thead>
-            <th scope="col">#</th>
-            <th scope="col">Image</th>
-            <th scope="col">Name</th>
-            <th scope="col" colspan="2">Delete At</th>
-        </thead>
-        <tbody>
-            {{#each courses}}
-                <tr>
-                    <th scope="col">{{sum @index 1}}</th>
-                    <td style="max-width: 200px;"><img
-                            style="max-width: 50%;"
-                            src="{{image}}"
-                            alt="{{name}}"
-                            class="rounded img-fluid max-width-img"
-                        /></td>
-                    <td>{{name}}</td>
-                    <td>{{dateFormat deletedAt "MMMM Do YYYY, h:mm:ss a"}}</td>
-                    {{! //using dateformat helper }}
-                    <td>
-                        <div class="action-container d-flex justify-content-evenly">
-                            <a
-                                class="text-decoration-none btn btn-outline-success"
-                                href="/courses/{{_id}}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modal-restore-course"
-                                data-bs-whatever="{{_id}}"
-                            ><span><i class="fa-solid fa-trash-can-arrow-up"></i>
-                                    Restore</span></a>
-                            <a
-                                class="text-decoration-none btn btn-outline-danger"
-                                href="/courses/{{_id}}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modal-delete-course"
-                                data-bs-whatever="{{_id}}"
-                            ><span><i class="fa-solid fa-trash-can"></i>
-                                    Permanent Delete</span></a>
-                        </div>
-                    </td>
-                </tr>
-            {{else}}
-                <tr class="text-center">
-                    <td colspan="5">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <span>No courses to display</span>
-                    </td>
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</div>
+            <div class="actions-container ms-3">
+                <button
+                    type="submit"
+                    class="btn btn-danger disabled action-delete-btn"
+                    title="Move to bin"
+                >
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="table table-hover mt-4">
+                <thead>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col" colspan="2">Delete At</th>
+                </thead>
+                <tbody>
+                    {{#each courses}}
+                        <tr>
+                            <th scope="col">{{sum @index 1}}</th>
+                            <td style="max-width: 200px;"><img
+                                    style="max-width: 50%;"
+                                    src="{{image}}"
+                                    alt="{{name}}"
+                                    class="rounded img-fluid max-width-img"
+                                /></td>
+                            <td>{{name}}</td>
+                            <td>{{dateFormat deletedAt "MMMM Do YYYY, h:mm:ss a"}}</td>
+                            {{! //using dateformat helper }}
+                            <td>
+                                <div class="action-container d-flex justify-content-evenly">
+                                    <a
+                                        class="text-decoration-none btn btn-outline-success"
+                                        href="/courses/{{_id}}"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-restore-course"
+                                        data-bs-whatever="{{_id}}"
+                                    ><span><i class="fa-solid fa-trash-can-arrow-up"></i>
+                                            Restore</span></a>
+                                    <a
+                                        class="text-decoration-none btn btn-outline-danger"
+                                        href="/courses/{{_id}}"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-delete-course"
+                                        data-bs-whatever="{{_id}}"
+                                    ><span><i class="fa-solid fa-trash-can"></i>
+                                            Permanent Delete</span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {{else}}
+                        <tr class="text-center">
+                            <td colspan="5">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>No courses to display</span>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
 
 {{! restore-course-form }}
 <form method="post" id="restore-course-form"></form>
@@ -145,33 +213,18 @@
 
 <script>
 
-    var restoreCourseModal = document.getElementById('modal-restore-course');
-    var restoreCourseForm = document.getElementById("restore-course-form");
-    var btnRestoreCourse = document.getElementById("btn-restore-course");
-    var restore_id;
-
-    restoreCourseModal.addEventListener('show.bs.modal', function (event) {
-        var id = event.relatedTarget;
-        restore_id = id.getAttribute('data-bs-whatever'); 
-    });
-
-    btnRestoreCourse.onclick= function(){ 
-        restoreCourseForm.action = "/courses/"+restore_id+"/restore?_method=PATCH";
-        restoreCourseForm.submit() 
-    };
-    
-    var deleteCourseModal = document.getElementById('modal-delete-course');
-    var deleteCourseForm = document.getElementById("delete-course-form");
-    var btnDeleteCourse = document.getElementById("btn-delete-course");
-    var delete_id;
-    
-    deleteCourseModal.addEventListener('show.bs.modal', function (event) {
-        var id = event.relatedTarget;
-        delete_id = id.getAttribute('data-bs-whatever'); 
-    });
-
-    btnDeleteCourse.onclick= function(){ 
-        deleteCourseForm.action = "/courses/"+delete_id+"/force?_method=DELETE";
-        deleteCourseForm.submit() 
-    };
+    var restoreCourseModal = document.getElementById('modal-restore-course'); var restoreCourseForm
+    = document.getElementById("restore-course-form"); var btnRestoreCourse =
+    document.getElementById("btn-restore-course"); var restore_id;
+    restoreCourseModal.addEventListener('show.bs.modal', function (event) { var id =
+    event.relatedTarget; restore_id = id.getAttribute('data-bs-whatever'); });
+    btnRestoreCourse.onclick= function(){ restoreCourseForm.action =
+    "/courses/"+restore_id+"/restore?_method=PATCH"; restoreCourseForm.submit() }; var
+    deleteCourseModal = document.getElementById('modal-delete-course'); var deleteCourseForm =
+    document.getElementById("delete-course-form"); var btnDeleteCourse =
+    document.getElementById("btn-delete-course"); var delete_id;
+    deleteCourseModal.addEventListener('show.bs.modal', function (event) { var id =
+    event.relatedTarget; delete_id = id.getAttribute('data-bs-whatever'); });
+    btnDeleteCourse.onclick= function(){ deleteCourseForm.action =
+    "/courses/"+delete_id+"/force?_method=DELETE"; deleteCourseForm.submit() };
 </script>
