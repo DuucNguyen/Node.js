@@ -24,7 +24,9 @@ body {
 .container {
     max-width: 1500px;
 }
-
+.container-form{
+    max-height: 85%;;
+}
 .main-content-container {
     background-color: #f2f6fc;
     border-radius: 25px;
@@ -38,6 +40,13 @@ body {
     top: 0;
     z-index: 1000;
 }
+.table-head{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+}
+
 .sidebar-container {
     width: 350px;
     padding: 10px;
@@ -45,7 +54,7 @@ body {
     border-radius: 25px;
 }
 .table-container {
-    max-height: 80%;
+    max-height: 85%;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #888888 #f0f0f0; /* Adjust as needed */
