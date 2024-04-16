@@ -33,7 +33,7 @@ class MeController {
     //[GET] me/bin/courses
     async deletedCourses(req, res, next) {
         Promise.all([
-            Courses.findDeleted().lean(),
+            Courses.findDeleted().sortable(req).lean(),
             Courses.countDocumentsDeleted(),
             Courses.countDocuments(),
         ]) //receive multiple promises

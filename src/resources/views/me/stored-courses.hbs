@@ -247,17 +247,22 @@
                 function renderDeleteAllAction() {
                     var checkedCourses = $("input[name = 'courseIds[]']:checked").length;
                     if (checkedCourses > 0) {
-                        console.log(action_delete_action);
                         action_delete_action.removeClass("disabled");
                     } else {
                         action_delete_action.addClass("disabled");
                     }
                 }
 
+
                 action_delete_action.click(function (e) {
                     e.preventDefault();
                     var isSumittable = !$(this).hasClass("disabled");
                     if (isSumittable) {
+                        var hiddenInput = document.createElement("input");
+                        hiddenInput.type = "hidden";
+                        hiddenInput.name= "action";
+                        hiddenInput.value= "delete";
+                        containerForm.appendChild(hiddenInput);
                         containerForm.submit();
                     }
                 });

@@ -73,9 +73,23 @@ class CourseController {
     }
     //[POST] /courses/handle-form-action
     async handleFormAction(req, res, next) {
-        await Courses.delete({ _id: { $in: req.body.courseIds } }) //delete plugin (soft delete)
-            .then(() => res.redirect("back"))
-            .catch(next);
+        const action = req.body.action;
+        if (action === "delete") {
+            await Courses.delete({ _id: { $in: req.body.courseIds } }) //delete plugin (soft delete)
+                .then(() => res.redirect("back"))
+                .catch(next);
+        } else if (action === "restore") {
+            await Courses.updateManyDeleted(
+                { _id: { $in: req.body.courseIds } },
+                { deleted: false },
+            )
+                .then(() => res.redirect("back"))
+                .catch(next);
+        }else if (action === "delete_force"){
+            await Courses.deleteMany({ _id: { $in: req.body.courseIds } }) //delete plugin (soft delete)
+                .then(() => res.redirect("back"))
+                .catch(next);
+        }
     }
 }
 

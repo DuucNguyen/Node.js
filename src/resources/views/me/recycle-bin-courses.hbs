@@ -71,20 +71,47 @@
                 >
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-success disabled action-restore-btn"
+                    title="Restore"
+                >
+                    <i class="fa-solid fa-trash-can-arrow-up"></i>
+                </button>
             </div>
         </div>
         <div class="table-container">
             <table class="table table-hover mt-4">
                 <thead>
                     <th scope="col">#</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col" colspan="2">Delete At</th>
+                    <th scope="col">
+                        Image
+                    </th>
+                    <th scope="col">
+                        Name
+                        {{{sortable "name" _sort}}}
+                    </th>
+                    <th scope="col" colspan="2">
+                        Delete At
+                        {{{sortable "deletedAt" _sort}}}
+                    </th>
                 </thead>
                 <tbody>
                     {{#each courses}}
                         <tr>
-                            <th scope="col">{{sum @index 1}}</th>
+                            <th scope="col">
+                                <div>
+                                    <input
+                                        class="form-check-input ms-3"
+                                        type="checkbox"
+                                        id="checkboxNoLabel"
+                                        name="courseIds[]"
+                                        value="{{_id}}"
+                                        aria-label="..."
+                                    />
+                                </div>
+                            </th>
                             <td style="max-width: 200px;"><img
                                     style="max-width: 50%;"
                                     src="{{image}}"
@@ -212,19 +239,88 @@
 </div>
 
 <script>
+        var restoreCourseModal = document.getElementById("modal-restore-course");
+        var restoreCourseForm = document.getElementById("restore-course-form");
+        var btnRestoreCourse = document.getElementById("btn-restore-course");
+        var restore_id;
+        restoreCourseModal.addEventListener("show.bs.modal", function (event) {
+            var id = event.relatedTarget;
+            restore_id = id.getAttribute("data-bs-whatever");
+        });
+        btnRestoreCourse.onclick = function () {
+            restoreCourseForm.action = "/courses/" + restore_id + "/restore?_method=PATCH";
+            restoreCourseForm.submit();
+        };
+        var deleteCourseModal = document.getElementById("modal-delete-course");
+        var deleteCourseForm = document.getElementById("delete-course-form");
+        var btnDeleteCourse = document.getElementById("btn-delete-course");
+        var delete_id;
+        deleteCourseModal.addEventListener("show.bs.modal", function (event) {
+            var id = event.relatedTarget;
+            delete_id = id.getAttribute("data-bs-whatever");
+        });
+        btnDeleteCourse.onclick = function () {
+            deleteCourseForm.action = "/courses/" + delete_id + "/force?_method=DELETE";
+            deleteCourseForm.submit();
+        };
 
-    var restoreCourseModal = document.getElementById('modal-restore-course'); var restoreCourseForm
-    = document.getElementById("restore-course-form"); var btnRestoreCourse =
-    document.getElementById("btn-restore-course"); var restore_id;
-    restoreCourseModal.addEventListener('show.bs.modal', function (event) { var id =
-    event.relatedTarget; restore_id = id.getAttribute('data-bs-whatever'); });
-    btnRestoreCourse.onclick= function(){ restoreCourseForm.action =
-    "/courses/"+restore_id+"/restore?_method=PATCH"; restoreCourseForm.submit() }; var
-    deleteCourseModal = document.getElementById('modal-delete-course'); var deleteCourseForm =
-    document.getElementById("delete-course-form"); var btnDeleteCourse =
-    document.getElementById("btn-delete-course"); var delete_id;
-    deleteCourseModal.addEventListener('show.bs.modal', function (event) { var id =
-    event.relatedTarget; delete_id = id.getAttribute('data-bs-whatever'); });
-    btnDeleteCourse.onclick= function(){ deleteCourseForm.action =
-    "/courses/"+delete_id+"/force?_method=DELETE"; deleteCourseForm.submit() };
+        document.addEventListener("DOMContentLoaded", function () {
+            var checkboxAll = $("#checkbox-all"); //select-all-btn
+            var courseIdCheckBox = $("input[name = 'courseIds[]']");
+            var action_delete_action = $(".action-delete-btn");
+            var action_restore_action = $(".action-restore-btn");
+            var checkboxAll = $("#checkbox-all"); //select-all-btn
+            var containerForm = document.forms["container-form"];
+            //Select all change
+            checkboxAll.change(function () {
+                var isCheckedAll = checkboxAll.prop("checked"); //property Checked of select-all-btn
+                courseIdCheckBox.prop("checked", isCheckedAll); //set property Checked of all check box
+                renderDeleteAllAction();
+            });
+
+            //Single checkbox change
+            courseIdCheckBox.change(function () {
+                var isCheckedAll =
+                    courseIdCheckBox.length === $("input[name = 'courseIds[]']:checked").length; //compare all vs checked
+                checkboxAll.prop("checked", isCheckedAll); //set property Checked of select-all-btn
+                renderDeleteAllAction();
+            });
+
+            //Re-render check all actions
+            function renderDeleteAllAction() {
+                var checkedCourses = $("input[name = 'courseIds[]']:checked").length;
+                if (checkedCourses > 0) {
+                    action_delete_action.removeClass("disabled");
+                    action_restore_action.removeClass("disabled");
+                } else {
+                    action_delete_action.addClass("disabled");
+                    action_restore_action.addClass("disabled");
+                }
+            }
+
+            action_restore_action.click(function (e) {
+                e.preventDefault();
+                var isSumittable = !$(this).hasClass("disabled");
+                if (isSumittable) {
+                    var hiddenInput = document.createElement("input");
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "action";
+                    hiddenInput.value = "restore";
+                    containerForm.appendChild(hiddenInput);
+                    containerForm.submit();
+                }
+            });
+            action_delete_action.click(function (e) {
+                e.preventDefault();
+                var isSumittable = !$(this).hasClass("disabled");
+                if (isSumittable) {
+                    var hiddenInput = document.createElement("input");
+                    hiddenInput.type = "hidden";
+                    hiddenInput.name = "action";
+                    hiddenInput.value = "delete_force";
+                    containerForm.appendChild(hiddenInput);
+                    containerForm.submit();
+                }
+            });
+        });
 </script>
