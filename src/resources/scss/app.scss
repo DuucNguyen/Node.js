@@ -4,10 +4,10 @@
 body {
     background-color: #cdddd5;
 }
-.card-title-wrapper {
+.course {
     transition: transform 0.2s ease-in-out;
 }
-.card-title-wrapper:hover {
+.course:hover {
     transform: translateY(-5px); /* Adjust the value as needed */
 }
 //[create courses/update courses]
@@ -103,5 +103,18 @@ body {
     background-color: #78a37c;
 }
 
-//recycle bin
+//home 
+.courses-container{
+    margin-left: 50px;
+    background-color: white;
+    border-radius: 25px;
+}
+.actions-container{
+    background-color: white;
+    border-radius: 25px;
+}
+.course img{
+    width: 220px;
+    border-radius: 25px !important;
+}
 
