@@ -6,7 +6,7 @@ const dateFormat = require("handlebars-dateformat");
 const path = require("path");
 const methodOverride = require("method-override");
 
-const SortMiddleware = require("./app/middlewares/sortMiddlewarexxxxx");
+const SortMiddleware = require("./app/middlewares/sortMiddleware");
 const route = require("./routes");
 const db = require("./config/db");
 
