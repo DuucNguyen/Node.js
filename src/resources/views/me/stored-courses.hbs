@@ -4,6 +4,7 @@
     method="POST"
     action="/courses/handle-form-action"
 >
+
     <div class="sidebar-container">
         <div class="sidebar-my-courses d-flex align-items-center fs-5 fw-bold">
             <div class="courses-count-statistic">
@@ -24,7 +25,7 @@
                     class="text-decoration-none d-flex justify-content-between"
                 >
                     <span>
-                        <i class="fa-solid fa-window-restore me-3"></i>
+                        <i class="fa-solid fa-box-archive me-3"></i>
                         Total Courses
                     </span>
                     <span>
@@ -76,7 +77,7 @@
         <div class="table-container">
             <table class="table table-hover mt-4">
                 <thead>
-                    <th scope="col" colspan="2">
+                    <th scope="col">
                         #
                     </th>
                     <th scope="col">
@@ -84,9 +85,11 @@
                     </th>
                     <th scope="col">
                         Name
+                        {{{sortable 'name' _sort}}}
                     </th>
                     <th scope="col" colspan="2">
                         Last Modified
+                        {{{sortable 'updatedAt' _sort}}}
                     </th>
                 </thead>
                 <tbody>

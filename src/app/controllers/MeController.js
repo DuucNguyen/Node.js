@@ -4,8 +4,15 @@ class MeController {
     async storedCourses(req, res, next) {
         //promise - each promises cannot pass multiple variables
         //=> use distructuring pattern (multiple promises)
+        let coursesQuery = Courses.find().lean();
+        if (req.query.hasOwnProperty("_sort")) {
+            console.log(req.query.column+": "+req.query.type);
+            coursesQuery = coursesQuery.sort({
+                [req.query.column]: req.query.type,  //consition : [column name] : order
+            });
+        }
         Promise.all([
-            Courses.find().lean(),
+            coursesQuery,
             Courses.countDocumentsDeleted(),
             Courses.countDocuments(),
         ]) //receive multiple promises

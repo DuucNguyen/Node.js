@@ -6,7 +6,7 @@ const dateFormat = require("handlebars-dateformat");
 const path = require("path");
 const methodOverride = require("method-override");
 
-const routes = require("./routes");
+const SortMiddleware = require("./app/middlewares/SortMiddleware");
 const route = require("./routes");
 const db = require("./config/db");
 
@@ -27,6 +27,8 @@ app.use(
 app.use(express.json()); //handler data get from js or (XMLHttpRequest, fetch, axios, ajax, ...)
 app.use(methodOverride("_method"));
 
+app.use(SortMiddleware);
+
 // HTTP logger log the path/port the app is listening
 // app.use(morgan("combined"));
 
@@ -37,6 +39,27 @@ app.engine(
         extname: ".hbs",
         helpers: {
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : "default";
+
+                const icons = {
+                    default: "fa-solid fa-sort",
+                    asc: "fa-solid fa-arrow-down-short-wide",
+                    desc: "fa-solid fa-arrow-down-wide-short",
+                };
+                const types = {
+                    default: "desc",
+                    asc: "desc",
+                    desc: "asc",
+                };
+
+                const icon = icons[sortType];
+                const type = types[sortType];
+
+                return `<a class="ms-2" href="?_sort&column=${field}&type=${type}">
+                <i class="${icon}"></i>
+                </a>`;
+            },
         },
     }),
 ); //set shorthand for handlers file for app to recognize
