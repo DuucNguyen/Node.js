@@ -5,11 +5,12 @@ module.exports = function sortMiddleware(req, res, next) {
     };
 
     if (req.query.hasOwnProperty("_sort")) {
-
-        Object.assign(res.locals._sort, { //override properties have the same name
+        const isValidType = ["asc", "desc"].includes(req.query.type);
+        Object.assign(res.locals._sort, {
+            //override properties have the same name
             enabled: true,
-            type:req.query.type,
-            column: req.query.column
+            type: isValidType ? req.query.type : "default",
+            column: req.query.column,
         });
     }
 

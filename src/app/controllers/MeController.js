@@ -6,16 +6,13 @@ class MeController {
         //=> use distructuring pattern (multiple promises)
         let coursesQuery = Courses.find().lean();
         if (req.query.hasOwnProperty("_sort")) {
-            console.log(req.query.column+": "+req.query.type);
+            const isValidType = ["asc", "desc"].includes(req.query.type); //valid req params
+            
             coursesQuery = coursesQuery.sort({
-                [req.query.column]: req.query.type,  //consition : [column name] : order
+                [req.query.column]: isValidType ? req.query.type : "desc", //condition : [column name] : order
             });
         }
-        Promise.all([
-            coursesQuery,
-            Courses.countDocumentsDeleted(),
-            Courses.countDocuments(),
-        ]) //receive multiple promises
+        Promise.all([coursesQuery, Courses.countDocumentsDeleted(), Courses.countDocuments()]) //receive multiple promises
             .then(
                 (
                     [courses, countDeleted, countCourses], //receive array of return values of corresponding promise
