@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const slug = require("mongoose-slug-updater");
 const mongoose_delete = require("mongoose-delete");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const CourseSchema = new mongoose.Schema(
     {
+        _id: { type: Number },
         name: { type: String, maxLength: 255, require: true },
-        description: { type: String, maxLength: 255 },
+        description: { type: String, maxLength: 500 },
         image: { type: String, maxLength: 255 },
         videoID: { type: String, maxLength: 255, require: true },
         slug: { type: String, slug: "name", unique: true },
@@ -14,9 +16,14 @@ const CourseSchema = new mongoose.Schema(
         // createdDate: { type: Date, default: Date.now },
         // updatedDate: { type: Date, default: Date.now }, -> { timestamps: true },
     },
-    { timestamps: true },
+    {
+        _id: false,
+        timestamps: true,
+    },
 );
 
+
+CourseSchema.plugin(AutoIncrement); //auto incease _id (default)
 //Custom helper //Mongoose query helper (re-use method)
 CourseSchema.query.sortable = function (req) {
     if (req.query.hasOwnProperty("_sort")) {

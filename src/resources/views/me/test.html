@@ -6,18 +6,28 @@
     </head>
     <body>
         <script>
+            var restoreCourseModal = document.getElementById("modal-restore-course");
+            var restoreCourseForm = document.getElementById("restore-course-form");
+            var btnRestoreCourse = document.getElementById("btn-restore-course");
+            var restore_id;
+            restoreCourseModal.addEventListener("show.bs.modal", function (event) {
+                var id = event.relatedTarget;
+                restore_id = id.getAttribute("data-bs-whatever");
+            });
+            btnRestoreCourse.onclick = function () {
+                restoreCourseForm.action = "/courses/" + restore_id + "/restore?_method=PATCH";
+                restoreCourseForm.submit();
+            };
             var deleteCourseModal = document.getElementById("modal-delete-course");
             var deleteCourseForm = document.getElementById("delete-course-form");
             var btnDeleteCourse = document.getElementById("btn-delete-course");
             var delete_id;
-
             deleteCourseModal.addEventListener("show.bs.modal", function (event) {
                 var id = event.relatedTarget;
                 delete_id = id.getAttribute("data-bs-whatever");
             });
-
             btnDeleteCourse.onclick = function () {
-                deleteCourseForm.action = "/courses/" + delete_id + "?_method=DELETE";
+                deleteCourseForm.action = "/courses/" + delete_id + "/force?_method=DELETE";
                 deleteCourseForm.submit();
             };
 
@@ -25,6 +35,7 @@
                 var checkboxAll = $("#checkbox-all"); //select-all-btn
                 var courseIdCheckBox = $("input[name = 'courseIds[]']");
                 var action_delete_action = $(".action-delete-btn");
+                var action_restore_action = $(".action-restore-btn");
                 var checkboxAll = $("#checkbox-all"); //select-all-btn
                 var containerForm = document.forms["container-form"];
                 //Select all change
@@ -46,17 +57,35 @@
                 function renderDeleteAllAction() {
                     var checkedCourses = $("input[name = 'courseIds[]']:checked").length;
                     if (checkedCourses > 0) {
-                        console.log(action_delete_action);
                         action_delete_action.removeClass("disabled");
+                        action_restore_action.removeClass("disabled");
                     } else {
                         action_delete_action.addClass("disabled");
+                        action_restore_action.addClass("disabled");
                     }
                 }
 
+                action_restore_action.click(function (e) {
+                    e.preventDefault();
+                    var isSumittable = !$(this).hasClass("disabled");
+                    if (isSumittable) {
+                        var hiddenInput = document.createElement("input");
+                        hiddenInput.type = "hidden";
+                        hiddenInput.name = "action";
+                        hiddenInput.value = "restore";
+                        containerForm.appendChild(hiddenInput);
+                        containerForm.submit();
+                    }
+                });
                 action_delete_action.click(function (e) {
                     e.preventDefault();
                     var isSumittable = !$(this).hasClass("disabled");
                     if (isSumittable) {
+                        var hiddenInput = document.createElement("input");
+                        hiddenInput.type = "hidden";
+                        hiddenInput.name = "action";
+                        hiddenInput.value = "delete_force";
+                        containerForm.appendChild(hiddenInput);
                         containerForm.submit();
                     }
                 });
