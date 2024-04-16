@@ -4,14 +4,7 @@ class MeController {
     async storedCourses(req, res, next) {
         //promise - each promises cannot pass multiple variables
         //=> use distructuring pattern (multiple promises)
-        let coursesQuery = Courses.find().lean();
-        if (req.query.hasOwnProperty("_sort")) {
-            const isValidType = ["asc", "desc"].includes(req.query.type); //valid req params
-            
-            coursesQuery = coursesQuery.sort({
-                [req.query.column]: isValidType ? req.query.type : "desc", //condition : [column name] : order
-            });
-        }
+        let coursesQuery = Courses.find().sortable(req).lean(); //using sortable helper in order to re-use method sort
         Promise.all([coursesQuery, Courses.countDocumentsDeleted(), Courses.countDocuments()]) //receive multiple promises
             .then(
                 (

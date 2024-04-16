@@ -10,7 +10,7 @@ module.exports = function sortMiddleware(req, res, next) {
             //override properties have the same name
             enabled: true,
             type: isValidType ? req.query.type : "default",
-            column: req.query.column,
+            column: req.query.column, 
         });
     }
 
