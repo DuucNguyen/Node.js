@@ -2,13 +2,17 @@ const Courses = require("../models/Courses");
 
 class CourseController {
     //[GET] /courses/:slug
-    async showDetail(req, res) {
+    async showDetail(req, res, next) {
         // console.log(req.body.slug);
         // console.log(req.query.slug);
         // console.log(req.params.slug);
 
-        const course = await Courses.findOne({ slug: req.params.slug }).lean();
-        res.render("./courses/showDetail", { course });
+        const course = await Courses.findOne({ slug: req.params.slug })
+            .lean()
+            .then(() => {
+                res.render("./courses/showDetail", { course });
+            })
+            .catch(next);
     }
 
     //[GET] /courses/create
@@ -32,8 +36,12 @@ class CourseController {
 
     //[GET] /courses/:id/edit
     async edit(req, res, next) {
-        const course = await Courses.findById(req.params.id).lean();
-        res.render("./courses/edit", { course });
+        const course = await Courses.findById(req.params.id)
+            .lean()
+            .then(() => {
+                res.render("./courses/edit", { course });
+            })
+            .catch(next);
     }
 
     //[PUT] /courses/:id
@@ -85,7 +93,7 @@ class CourseController {
             )
                 .then(() => res.redirect("back"))
                 .catch(next);
-        }else if (action === "delete_force"){
+        } else if (action === "delete_force") {
             await Courses.deleteMany({ _id: { $in: req.body.courseIds } }) //delete plugin (soft delete)
                 .then(() => res.redirect("back"))
                 .catch(next);
