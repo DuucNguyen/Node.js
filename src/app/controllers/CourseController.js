@@ -7,12 +7,8 @@ class CourseController {
         // console.log(req.query.slug);
         // console.log(req.params.slug);
 
-        const course = await Courses.findOne({ slug: req.params.slug })
-            .lean()
-            .then(() => {
-                res.render("./courses/showDetail", { course });
-            })
-            .catch(next);
+        const course = await Courses.findOne({ slug: req.params.slug }).lean();
+        res.render("./courses/showDetail", { course });
     }
 
     //[GET] /courses/create
@@ -74,7 +70,7 @@ class CourseController {
         //     .catch(next);
         //     .then(() => res.redirect("back"))
         const id = req.params.id;
-        const courses = await Courses.findOneAndUpdateDeleted({ _id: id }, { deleted: false })
+        await Courses.findOneAndUpdateDeleted({ _id: id }, { deleted: false })
             .lean()
             .then(() => res.redirect("back"))
             .catch(next);

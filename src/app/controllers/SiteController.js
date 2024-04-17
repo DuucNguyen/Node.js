@@ -5,12 +5,8 @@ class SiteController {
     async home(req, res, next) {
         // res.render("home");
         try {
-            const courses = await Courses.find()
-                .lean()
-                .then(() => {
-                    res.render("home", { courses });
-                })
-                .catch(next);
+            const courses = await Courses.find().lean();
+            res.render("home", { courses });
         } catch (err) {
             next(err);
         }
