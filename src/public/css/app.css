@@ -134,4 +134,28 @@ body {
   border-radius: 25px !important;
 }
 
+.navbar-action-login-btn {
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  margin-right: 30px;
+  padding: 9px 20px;
+}
+
+.navbar-action-registor-btn {
+  background: linear-gradient(to right bottom, #26ff7d, rgba(12, 140, 57, 0.3294117647));
+  border-radius: 99px;
+  color: #fff;
+  cursor: pointer;
+  padding: 9px 20px;
+  transition: opacity 0.25s;
+}
+
+button {
+  border: none;
+  box-shadow: none;
+  color: inherit;
+  outline: none;
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -118,3 +118,30 @@ body {
     border-radius: 25px !important;
 }
 
+//header
+
+.navbar-action-registor-btn{
+}
+
+.navbar-action-login-btn{
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    margin-right: 30px;
+    padding: 9px 20px;
+}
+.navbar-action-registor-btn{
+    background: linear-gradient(to right bottom, #26ff7d, #0c8c3954);
+    border-radius: 99px;
+    color: #fff;
+    cursor: pointer;
+    padding: 9px 20px;
+    transition: opacity .25s;
+}
+button{
+    border: none;
+    box-shadow: none;
+    color: inherit;
+    outline: none;
+}
+
