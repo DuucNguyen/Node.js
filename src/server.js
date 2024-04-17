@@ -17,7 +17,7 @@ const db = require("./config/db");
 db.connect();
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
 
