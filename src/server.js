@@ -1,6 +1,4 @@
-if (process.env.NOTE_ENV !== "production") {
-    require("dotenv").config();
-} //setup environtment file (re-use, deploy)
+ //setup environtment file (re-use, deploy)
 // console.log(result); // Check if there are any errors or confirm that dotenv is loaded successfully.
 
 const express = require("express");
