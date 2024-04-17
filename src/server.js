@@ -1,3 +1,6 @@
+const dotenv = require('dotenv').config(); //setup environtment file (re-use, deploy)
+// console.log(result); // Check if there are any errors or confirm that dotenv is loaded successfully.
+
 const express = require("express");
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
@@ -14,7 +17,7 @@ const db = require("./config/db");
 db.connect();
 
 const app = express();
-const port = 8081;
+const port = 8080;
 
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
 
@@ -68,5 +71,5 @@ route(app);
 
 // Listen on port
 app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.log(`App listening on port:  http://localhost:${port}`);
 });
