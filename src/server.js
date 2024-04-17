@@ -1,5 +1,8 @@
- //setup environtment file (re-use, deploy)
-// console.log(result); // Check if there are any errors or confirm that dotenv is loaded successfully.
+//setup environtment file (re-use, deploy)
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+// console.log(require("dotenv").config()); // Check if there are any errors or confirm that dotenv is loaded successfully.
 
 const express = require("express");
 const morgan = require("morgan");
@@ -18,7 +21,6 @@ db.connect();
 
 const app = express();
 const port = process.env.PORT || 8080;
-
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
 
 app.use(

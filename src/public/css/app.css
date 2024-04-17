@@ -1,0 +1,137 @@
+body {
+  background-color: #cdddd5;
+}
+
+.course {
+  transition: transform 0.2s ease-in-out;
+}
+
+.course:hover {
+  transform: translateY(-5px); /* Adjust the value as needed */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.max-width-img {
+  max-width: 50%;
+}
+
+.actions {
+  margin: 0 4px;
+}
+
+.container {
+  max-width: 1500px;
+}
+
+.container-form {
+  max-height: 85%;
+}
+
+.main-content-container {
+  background-color: #f2f6fc;
+  border-radius: 25px;
+}
+
+.content-head {
+  border-start-end-radius: 25px;
+  border-start-start-radius: 25px;
+  background-color: white;
+  padding: 10px 6px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.table-head {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+}
+
+.sidebar-container {
+  width: 350px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.table-container {
+  max-height: 85%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888888 #f0f0f0; /* Adjust as needed */
+}
+
+.sidebar-my-courses {
+  background-color: #78a37c;
+  border-radius: 25px;
+  padding-right: 10px;
+}
+
+.courses-count {
+  width: 30%;
+  color: white;
+  background-color: #78a37c;
+  border-radius: 25px;
+}
+
+.courses-count-statistic {
+  color: white;
+  height: 100%;
+  padding: 10px;
+  background-color: #127362;
+  border-radius: 25px;
+}
+
+.courses-count:hover {
+  color: black !important;
+  background-color: #127362;
+}
+
+.sidebar-item {
+  text-decoration: none;
+  border-radius: 25px;
+  padding: 5px 10px;
+}
+
+.sidebar-item a {
+  color: black;
+}
+
+.sidebar-item-colorred {
+  background-color: #78a37c;
+}
+
+.sidebar-item-colorred a {
+  color: white;
+}
+
+.sidebar-item:hover {
+  background-color: #eaebef;
+}
+
+.sidebar-item-colorred:hover {
+  background-color: #78a37c;
+}
+
+.courses-container {
+  margin-left: 50px;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.actions-container {
+  background-color: white;
+  border-radius: 25px;
+}
+
+.course img {
+  width: 220px;
+  border-radius: 25px !important;
+}
+
+/*# sourceMappingURL=app.css.map */
