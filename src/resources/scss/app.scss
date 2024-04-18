@@ -2,7 +2,6 @@
 
 //[Home]
 body {
-    background-color: #cdddd5;
 }
 .course {
     transition: transform 0.2s ease-in-out;
@@ -105,24 +104,28 @@ body {
 
 //home 
 .courses-container{
-    margin-left: 50px;
     background-color: white;
     border-radius: 25px;
+    margin-top: 20px;
+    flex-grow: 1;
 }
 .actions-container{
     background-color: white;
-    border-radius: 25px;
+    border-radius: 25px; 
+}
+.course{
+    width: 24%;
+}
+.course a{
+    color: black;
+    font-weight: 500;
 }
 .course img{
-    width: 220px;
-    border-radius: 25px !important;
+    width: 100%;
+    border-radius: 8px !important;
 }
 
 //header
-
-.navbar-action-registor-btn{
-}
-
 .navbar-action-login-btn{
     color: white;
     background: transparent;
@@ -143,5 +146,45 @@ button{
     box-shadow: none;
     color: inherit;
     outline: none;
+}
+.side-wrappper{
+    width: 100px;
+    position: sticky;
+    top: 90px;
+    z-index: 1000;
+}
+.side-wrappper ul{
+    padding-left:0px;
+    list-style-type: none;
+}
+.side-wrapper-item{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+}
+.side-wrapper-item:hover{
+    color: black;
+    background-color: #eaebef;
+}
+.side-wrapper-item i{
+    font-size: 20px;
+}
+.side-wrapper-item span{
+    font-size: 14px;
+}
+.navbar{
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
