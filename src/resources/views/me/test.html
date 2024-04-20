@@ -1,94 +1,35 @@
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Preview Selected Image</title>
     </head>
     <body>
+        <input type="file" id="imageInput" accept="image/*" />
+        <br />
+        <img
+            id="previewImage"
+            src="#"
+            alt="Preview Image"
+            style="display: none; max-width: 300px; max-height: 300px" />
+
+        <img src="src\public\uploads\courseImages\4ff1b3a96e4f4662d34209bd4e0f41e5" alt="">
+
+
+
         <script>
-            var restoreCourseModal = document.getElementById("modal-restore-course");
-            var restoreCourseForm = document.getElementById("restore-course-form");
-            var btnRestoreCourse = document.getElementById("btn-restore-course");
-            var restore_id;
-            restoreCourseModal.addEventListener("show.bs.modal", function (event) {
-                var id = event.relatedTarget;
-                restore_id = id.getAttribute("data-bs-whatever");
-            });
-            btnRestoreCourse.onclick = function () {
-                restoreCourseForm.action = "/courses/" + restore_id + "/restore?_method=PATCH";
-                restoreCourseForm.submit();
-            };
-            var deleteCourseModal = document.getElementById("modal-delete-course");
-            var deleteCourseForm = document.getElementById("delete-course-form");
-            var btnDeleteCourse = document.getElementById("btn-delete-course");
-            var delete_id;
-            deleteCourseModal.addEventListener("show.bs.modal", function (event) {
-                var id = event.relatedTarget;
-                delete_id = id.getAttribute("data-bs-whatever");
-            });
-            btnDeleteCourse.onclick = function () {
-                deleteCourseForm.action = "/courses/" + delete_id + "/force?_method=DELETE";
-                deleteCourseForm.submit();
-            };
+            document.getElementById("imageInput").addEventListener("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
 
-            document.addEventListener("DOMContentLoaded", function () {
-                var checkboxAll = $("#checkbox-all"); //select-all-btn
-                var courseIdCheckBox = $("input[name = 'courseIds[]']");
-                var action_delete_action = $(".action-delete-btn");
-                var action_restore_action = $(".action-restore-btn");
-                var checkboxAll = $("#checkbox-all"); //select-all-btn
-                var containerForm = document.forms["container-form"];
-                //Select all change
-                checkboxAll.change(function () {
-                    var isCheckedAll = checkboxAll.prop("checked"); //property Checked of select-all-btn
-                    courseIdCheckBox.prop("checked", isCheckedAll); //set property Checked of all check box
-                    renderDeleteAllAction();
-                });
+                reader.onload = function (e) {
+                    var previewImage = document.getElementById("previewImage");
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
 
-                //Single checkbox change
-                courseIdCheckBox.change(function () {
-                    var isCheckedAll =
-                        courseIdCheckBox.length === $("input[name = 'courseIds[]']:checked").length; //compare all vs checked
-                    checkboxAll.prop("checked", isCheckedAll); //set property Checked of select-all-btn
-                    renderDeleteAllAction();
-                });
-
-                //Re-render check all actions
-                function renderDeleteAllAction() {
-                    var checkedCourses = $("input[name = 'courseIds[]']:checked").length;
-                    if (checkedCourses > 0) {
-                        action_delete_action.removeClass("disabled");
-                        action_restore_action.removeClass("disabled");
-                    } else {
-                        action_delete_action.addClass("disabled");
-                        action_restore_action.addClass("disabled");
-                    }
-                }
-
-                action_restore_action.click(function (e) {
-                    e.preventDefault();
-                    var isSumittable = !$(this).hasClass("disabled");
-                    if (isSumittable) {
-                        var hiddenInput = document.createElement("input");
-                        hiddenInput.type = "hidden";
-                        hiddenInput.name = "action";
-                        hiddenInput.value = "restore";
-                        containerForm.appendChild(hiddenInput);
-                        containerForm.submit();
-                    }
-                });
-                action_delete_action.click(function (e) {
-                    e.preventDefault();
-                    var isSumittable = !$(this).hasClass("disabled");
-                    if (isSumittable) {
-                        var hiddenInput = document.createElement("input");
-                        hiddenInput.type = "hidden";
-                        hiddenInput.name = "action";
-                        hiddenInput.value = "delete_force";
-                        containerForm.appendChild(hiddenInput);
-                        containerForm.submit();
-                    }
-                });
+                reader.readAsDataURL(file);
             });
         </script>
     </body>

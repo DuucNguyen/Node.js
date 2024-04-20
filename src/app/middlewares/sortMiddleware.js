@@ -5,7 +5,8 @@ module.exports = function sortMiddleware(req, res, next) {
     };
 
     if (req.query.hasOwnProperty("_sort")) {
-        const isValidType = ["asc", "desc"].includes(req.query.type);
+        const isValidType = ["asc", "desc"].includes(req.query.type); //handle invalid sort type URL
+        
         Object.assign(res.locals._sort, {
             //override properties have the same name
             enabled: true,

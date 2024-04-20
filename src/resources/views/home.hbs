@@ -21,13 +21,24 @@
             <div class="course m-1">
                 <div class="m-3">
                     <a href="/courses/{{slug}}" class="a-img text-decoration-none fs-6">
-                        <img src="{{image}}" class="mb-2" alt="{{name}}" />
+                        <img src="{{actualImagePath}}" class="mb-2" alt="{{name}}" />
                         <span class="mb-2">{{name}}</span><br />
                         <span><i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                             Free</span>
                     </a>
                 </div>
             </div>
+        {{else}}
+            <div>
+                <i class="fa-solid fa-circle-info"></i>
+                <span>
+                    No course to display
+                </span>
+                <a href="/courses/create">
+                    Create a new Course
+                </a>
+            </div>
         {{/each}}
+
     </div>
 </div>

@@ -1,5 +1,8 @@
 const Courses = require("../models/Courses");
-
+const fs = require("fs");
+const path = require("path");
+const imageBasePath = "/uploads/courseImages"; //set path to all upload file image
+const uploadPath = path.join("src/public", imageBasePath); //config file dynamiccally
 class CourseController {
     //[GET] /courses/:slug
     async showDetail(req, res, next) {
@@ -18,17 +21,33 @@ class CourseController {
 
     //[POST] /courses/store
     async store(req, res) {
-        try {
-            const formData = req.body;
-            const newCourse = new Courses(formData);
-            await newCourse.save();
+        const fileName = req.file != null ? req.file.filename : null;
 
+        const formData = req.body;
+        const newCourse = new Courses({
+            name: formData.name,
+            description: formData.description,
+            imagePath: fileName,
+            videoID: formData.videoID
+         });
+        try {
+            await newCourse.save();
             res.redirect("/me/stored/courses");
         } catch (error) {
+            if(newCourse.imagePath!=null){
+                removeCourseImage(newCourse.imagePath);
+            }
             console.error("Error saving course:", error);
-            res.status(500).json({ error: "Error saving course" });
+            res.status(500).json({ error: "Error saving course" }); // lam lai
         }
+
+        function removeCourseImage(fileName) { //handle error save new course
+            fs.unlink(path.join(uploadPath, fileName), err=> {
+                if(err) console.error(err);
+            });
+        };
     }
+    
 
     //[GET] /courses/:id/edit
     async edit(req, res, next) {

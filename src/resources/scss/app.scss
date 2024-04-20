@@ -23,8 +23,8 @@ body {
 .container {
     max-width: 1500px;
 }
-.container-form{
-    max-height: 85%;;
+.container-form {
+    max-height: 85%;
 }
 .main-content-container {
     background-color: #f2f6fc;
@@ -39,7 +39,7 @@ body {
     top: 0;
     z-index: 1000;
 }
-.table-head{
+.table-head {
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -102,62 +102,62 @@ body {
     background-color: #78a37c;
 }
 
-//home 
-.courses-container{
+//home
+.courses-container {
     background-color: white;
     border-radius: 25px;
     margin-top: 20px;
     flex-grow: 1;
 }
-.actions-container{
+.actions-container {
     background-color: white;
-    border-radius: 25px; 
+    border-radius: 25px;
 }
-.course{
+.course {
     width: 24%;
 }
-.course a{
+.course a {
     color: black;
     font-weight: 500;
 }
-.course img{
+.course img {
     width: 100%;
     border-radius: 8px !important;
 }
 
 //header
-.navbar-action-login-btn{
+.navbar-action-login-btn {
     color: white;
     background: transparent;
     cursor: pointer;
     margin-right: 30px;
     padding: 9px 20px;
 }
-.navbar-action-registor-btn{
+.navbar-action-registor-btn {
     background: linear-gradient(to right bottom, #26ff7d, #0c8c3954);
     border-radius: 99px;
     color: #fff;
     cursor: pointer;
     padding: 9px 20px;
-    transition: opacity .25s;
+    transition: opacity 0.25s;
 }
-button{
+button {
     border: none;
     box-shadow: none;
     color: inherit;
     outline: none;
 }
-.side-wrappper{
+.side-wrappper {
     width: 100px;
     position: sticky;
     top: 90px;
     z-index: 1000;
 }
-.side-wrappper ul{
-    padding-left:0px;
+.side-wrappper ul {
+    padding-left: 0px;
     list-style-type: none;
 }
-.side-wrapper-item{
+.side-wrapper-item {
     text-decoration: none;
     color: black;
     display: flex;
@@ -171,20 +171,37 @@ button{
     justify-content: center;
     margin: 8px;
 }
-.side-wrapper-item:hover{
+.side-wrapper-item:hover {
     color: black;
     background-color: #eaebef;
 }
-.side-wrapper-item i{
+.side-wrapper-item i {
     font-size: 20px;
 }
-.side-wrapper-item span{
+.side-wrapper-item span {
     font-size: 14px;
 }
-.navbar{
+.navbar {
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+//create course
+.form-input-img input {
+}
+.previewImage {
+    background-color: #eaebef;
+    width: 350px;
+    height: 200px;
+    border-radius: 15px;
+    border: 1px solid #888888;
+}
+.form-input-img{
+    width: 40%;
+}
+.form-input-infor{
+    width: 50%;
 }
 

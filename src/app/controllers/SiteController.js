@@ -5,8 +5,14 @@ class SiteController {
     async home(req, res, next) {
         // res.render("home");
         try {
-            const courses = await Courses.find().lean();
-            res.render("home", { courses });
+            // Fetch courses without using lean()
+            const courses = await Courses.find();
+            
+            // Convert each Mongoose document to a plain JavaScript object with virtuals populated
+            const coursesWithVirtuals = courses.map((course) => course.toObject());
+
+            // Pass coursesWithVirtuals to your Handlebars template
+            res.render("home", { courses: coursesWithVirtuals });
         } catch (err) {
             next(err);
         }

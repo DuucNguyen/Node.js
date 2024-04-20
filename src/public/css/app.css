@@ -211,4 +211,20 @@ button {
   z-index: 1000;
 }
 
+.previewImage {
+  background-color: #eaebef;
+  width: 350px;
+  height: 200px;
+  border-radius: 15px;
+  border: 1px solid #888888;
+}
+
+.form-input-img {
+  width: 40%;
+}
+
+.form-input-infor {
+  width: 50%;
+}
+
 /*# sourceMappingURL=app.css.map */

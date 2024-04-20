@@ -1,36 +1,44 @@
 <div class="mt-5">
     <div class="container mt-5">
         <h2>Create new Course</h2>
-        <form method="post" action="/courses/store">
-            <div class="form-group mb-3">
-                <label for="name">Name:</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="name"
-                    name="name"
-                    placeholder="Enter course name"
-                />
-            </div>
-            <div class="form-group mb-3">
-                <label for="description">Description:</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="description"
-                    name="description"
-                    placeholder="Enter description"
-                />
-            </div>
-            <div class="form-group mb-3">
-                <label for="image">Image URL:</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="image"
-                    name="image"
-                    placeholder="Enter image URL"
-                />
+        <form method="post" action="/courses/store" enctype="multipart/form-data">
+            <div class="form-group mb-3 d-flex justify-content-between">
+                <div class="form-input-infor">
+                    <div class="form-input-infor-name">
+                        <label for="name">Name:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            placeholder="Enter course name"
+                        />
+                    </div>
+                    <div class="mt-2 form-input-infor-description">
+                        <label for="description">Description:</label>
+                        <textarea
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            placeholder="Enter description"
+                            style="height: 200px;"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="form-input-img">
+                    <label for="image">Image:</label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        id="imageInput"
+                        accept="iamge/*"
+                        name="imageFile"
+                        placeholder="Enter image URL"
+                    />
+                    <br />
+                    <img class="previewImage" id="previewImage" src="" style="display: block; " />
+                </div>
             </div>
             <div class="form-group mb-3">
                 <label for="videoID">Video ID:</label>
@@ -46,3 +54,9 @@
         </form>
     </div>
 </div>
+<script>
+    {{! document.getElementById("imageInput").addEventListener("change", function (event) { var file =
+    event.target.files[0]; var reader = new FileReader(); reader.onload = function (e) { var
+    previewImage = document.getElementById("previewImage"); previewImage.src = e.target.result;
+    previewImage.style.display = "block"; }; reader.readAsDataURL(file); }); }}
+</script>
