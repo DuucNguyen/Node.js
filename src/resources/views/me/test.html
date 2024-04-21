@@ -3,34 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Preview Selected Image</title>
+        <title>Draggable File Upload</title>
+        <style>
+            #file_input {
+                width: 300px;
+                height: 200px;
+                border: 2px dashed #ccc;
+                text-align: center;
+                line-height: 200px;
+                margin: 20px auto;
+            }
+        </style>
     </head>
     <body>
-        <input type="file" id="imageInput" accept="image/*" />
-        <br />
-        <img
-            id="previewImage"
-            src="#"
-            alt="Preview Image"
-            style="display: none; max-width: 300px; max-height: 300px" />
-
-        <img src="src\public\uploads\courseImages\4ff1b3a96e4f4662d34209bd4e0f41e5" alt="">
-
-
-
-        <script>
-            document.getElementById("imageInput").addEventListener("change", function (event) {
-                var file = event.target.files[0];
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    var previewImage = document.getElementById("previewImage");
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = "block";
-                };
-
-                reader.readAsDataURL(file);
-            });
-        </script>
+        <form>
+            <input type="file" id="file_input" name="file_input" multiple />
+        </form>
     </body>
 </html>

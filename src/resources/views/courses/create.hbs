@@ -36,11 +36,11 @@
                         name="imageFile"
                         placeholder="Enter image URL"
                     />
-                    <br />
-                    <img class="previewImage" id="previewImage" src="" style="display: block; " />
+                    <label for="" class="mt-2">Preview Image</label>
+                    <img class="previewImage" id="previewImage" src="\img\previewImage.png" style="display: block; " />
                 </div>
             </div>
-            <div class="form-group mb-3">
+            <div class="form-input-infor form-group mb-3">
                 <label for="videoID">Video ID:</label>
                 <input
                     type="text"
@@ -50,13 +50,21 @@
                     placeholder="Enter video ID"
                 />
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn-create"><i class="fa-solid fa-plus"></i> Create new course</button>
         </form>
     </div>
 </div>
 <script>
-    {{! document.getElementById("imageInput").addEventListener("change", function (event) { var file =
-    event.target.files[0]; var reader = new FileReader(); reader.onload = function (e) { var
-    previewImage = document.getElementById("previewImage"); previewImage.src = e.target.result;
-    previewImage.style.display = "block"; }; reader.readAsDataURL(file); }); }}
+    document.getElementById("imageInput").addEventListener("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var previewImage = document.getElementById("previewImage");
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            });
 </script>

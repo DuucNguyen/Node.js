@@ -227,4 +227,17 @@ button {
   width: 50%;
 }
 
+.btn-create {
+  background: #127362;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 7px 14px;
+  color: white;
+}
+
+.btn-create:hover {
+  background: #199b83;
+}
+
 /*# sourceMappingURL=app.css.map */

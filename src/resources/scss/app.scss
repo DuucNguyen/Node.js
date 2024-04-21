@@ -205,3 +205,15 @@ button {
     width: 50%;
 }
 
+.btn-create{
+    background:#127362;
+    border-radius: $btn-border-radius;
+    font-weight: $btn-font-weight;
+    font-size: $btn-font-size;
+    padding: $btn-padding;
+    color: white;
+}
+.btn-create:hover{
+    background:#199b83;
+}
+

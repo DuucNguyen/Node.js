@@ -4,8 +4,13 @@ class MeController {
     async storedCourses(req, res, next) {
         //promise - each promises cannot pass multiple variables
         //=> use distructuring pattern (multiple promises)
-        let coursesQuery = Courses.find().sortable(req).lean(); //using sortable helper in order to re-use method sort
-        Promise.all([coursesQuery, Courses.countDocumentsDeleted(), Courses.countDocuments()]) //receive multiple promises
+        let coursesQuery = await Courses.find().sortable(req); //using sortable helper in order to re-use method sort
+        let coursesQueryWithVirtual = coursesQuery.map((course) => course.toObject());
+        Promise.all([
+            coursesQueryWithVirtual,
+            Courses.countDocumentsDeleted(),
+            Courses.countDocuments(),
+        ]) //receive multiple promises
             .then(
                 (
                     [courses, countDeleted, countCourses], //receive array of return values of corresponding promise
@@ -32,11 +37,10 @@ class MeController {
 
     //[GET] me/bin/courses
     async deletedCourses(req, res, next) {
-        Promise.all([
-            Courses.findDeleted().sortable(req).lean(),
-            Courses.countDocumentsDeleted(),
-            Courses.countDocuments(),
-        ]) //receive multiple promises
+        let coursesDeletedQuery = await Courses.findDeleted().sortable(req); //mongoose doest not return array imadiately so await ot use map
+        let coursesQueryWithVirtual = coursesDeletedQuery.map((course) => course.toObject());
+
+        Promise.all([coursesQueryWithVirtual, Courses.countDocumentsDeleted(), Courses.countDocuments()]) //receive multiple promises
             .then(
                 (
                     [courses, countDeleted, countCourses], //receive array of return values of corresponding promise
