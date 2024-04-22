@@ -19,5 +19,15 @@
         <form>
             <input type="file" id="file_input" name="file_input" multiple />
         </form>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () { var searchInput =
+    document.getElementById("search-input"); var searchResult =
+    document.getElementById("search-result"); searchInput.addEventListener("focus", function(){
+    searchResult.style.display = "block"; }); searchInput.addEventListener("blur", function(){
+    searchResult.style.display = "none"; }); searchInput.addEventListener("input", function(){ var
+    valueAppend = document.getElementById("search-value-append"); valueAppend.textContent =
+    searchInput.value; }); });
+        </script>
     </body>
 </html>

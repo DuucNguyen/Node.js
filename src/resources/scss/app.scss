@@ -187,6 +187,49 @@ button {
     top: 0;
     z-index: 1000;
 }
+.navbar-search{
+    width: 500px;
+    margin-right: 10em;
+    border-radius: 25px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.navbar-search-ul{
+    list-style: none;
+}
+.navbar-search-input span{
+    color: white;
+    background-color: #22d768;
+    border: none;
+    border-radius: 25px;
+    padding: 0px 20px;
+}
+.navbar-search-input input{
+    border: none;
+    border-radius: 25px;
+}
+.search-result{
+    background: white;
+    position: absolute;
+    border-radius: 15px;
+    padding: 10px;
+    width: 470px;
+    height: 350px;
+    max-height: 600px;
+    box-shadow: 0 -4px 32px rgba(0, 0, 0, .2);
+    overflow-y: auto;
+}
+.search-result-head{
+}
+.search-result-course a{
+    color: black;
+}
+.search-result-course img{
+    border-radius: 5px;
+    width: 20%;
+    margin-right: 10px;
+}
 
 //create course
 .form-input-img input {

@@ -17,46 +17,99 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul
                 style="width: 100%;"
-                class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto d-flex flex-row-reverse"
+                class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto d-flex flex-row-reverse align-items-center"
             >
-                {{! <li class="nav-item dropdown">
-                    <a
-                        class="nav-link dropdown-toggle ms-auto"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        Management
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/courses/create">Create new course</a></li>
-                        <li><a class="dropdown-item" href="/me/stored/courses">My courses</a></li>
-                        <li><a class="dropdown-item" href="/me/stored/news">My News</a></li>
-                        <li><a class="dropdown-item" href="#">Update course</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#">Log out</a></li>
-                    </ul>
-                </li> }}
-                <li class="nav-item mt-1 ms-5">
-                    <div class="navbar-actions mt-1">
+                <li class="nav-item ms-5">
+                    <div class="navbar-actions">
                         <button class="navbar-action-login-btn fw-bold">Sign in</button>
                         <button class="navbar-action-registor-btn fw-bold">Sign up</button>
                     </div>
                 </li>
-                <li class="nav-item mt-1">
-                    <form class="d-flex">
-                        <button class="btn btn-outline-success me-2" type="submit">Search</button>
-                        <input
-                            class="form-control me-5"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                    </form>
+                <li class="nav-item me-5">
+                    <div class="navbar-search" id="navbar-search" tabindex="0">
+                        <ul class="navbar-search-ul">
+                            <li>
+                                <div class="input-group navbar-search-input">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-magnifying-glass"
+                                        ></i></span>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="search-input"
+                                        placeholder="Search course ..."
+                                        aria-label="Search course ..."
+                                        aria-describedby="basic-addon1"
+                                    />
+                                </div>
+                            </li>
+                            <li>
+                                <div
+                                    style="display: none;"
+                                    class="search-result mt-2"
+                                    id="search-result"
+                                >
+                                    <div class="search-result-head">
+                                        <span><i class="fa-solid fa-magnifying-glass"></i>
+                                            Result for
+                                            <span id="search-value-append"></span>
+                                        </span>
+                                    </div>
+                                    <hr />
+                                    <div class="search-result-body">
+                                        {{#each courses}}
+                                            <div class="search-result-course">
+                                                <div class="m-2">
+                                                    <a
+                                                        href="/courses/{{slug}}"
+                                                        class="a-img text-decoration-none fs-6 d-flex"
+                                                    >
+                                                        <img
+                                                            src="{{actualImagePath}}"
+                                                            alt="{{name}}"
+                                                        />
+                                                        <span class="mb-2">{{name}}</span><br />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {{else}}
+                                            <div>
+                                                <span>
+                                                    No result 
+                                                </span>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                    <hr />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+            var searchInputContainer = document.getElementById("navbar-search");
+            var searchInput = document.getElementById("search-input");
+            var searchResult = document.getElementById("search-result");
+
+            searchInputContainer.addEventListener("focus", function () {
+                searchResult.style.display = "block";
+            });
+            
+            searchInput.addEventListener("blur", function () {
+                searchResult.style.display = "none";
+            });
+            searchInput.addEventListener("input", function () {
+                searchResult.style.display = "block";
+                var valueAppend = document.getElementById("search-value-append");
+                valueAppend.textContent = searchInput.value;
+
+            });
+    });
+
+</script>
