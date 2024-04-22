@@ -1,0 +1,129 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="fa-brands fa-node fa-2xl"></i><span
+                class="fs-5 fw-bold ms-3"
+            >My Online Courses</span></a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul
+                style="width: 100%;"
+                class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto d-flex flex-row-reverse align-items-center"
+            >
+                <li class="nav-item ms-5">
+                    <div class="navbar-actions">
+                        <button class="navbar-action-login-btn fw-bold">Sign in</button>
+                        <button class="navbar-action-registor-btn fw-bold">Sign up</button>
+                    </div>
+                </li>
+                <li class="nav-item me-5">
+                    <div class="navbar-search" id="navbar-search" tabindex="0">
+                        <ul class="navbar-search-ul">
+                            <li>
+                                <div class="input-group navbar-search-input">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-magnifying-glass"
+                                        ></i></span>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="search-input"
+                                        placeholder="Search course ..."
+                                        aria-label="Search course ..."
+                                        aria-describedby="basic-addon1"
+                                    />
+                                </div>
+                            </li>
+                            <li>
+                            <div style="display: none;" class="search-result mt-2" id="search-result">
+                                <div class="search-result-head">
+                                    <span><i class="fa-solid fa-magnifying-glass"></i>
+                                        Result for
+                                        <span id="search-value-append"></span>
+                                    </span>
+                                </div>
+                                <hr />
+                                    {{>_searchResult}}
+                                <hr />
+                            </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var searchInputContainer = document.getElementById("navbar-search");
+            var searchInput = document.getElementById("search-input");
+            var searchResult = document.getElementById("search-result");
+
+            searchInputContainer.addEventListener("focus", function () {
+                searchResult.style.display = "block";
+            });
+             searchInput.addEventListener("focus", function (e) {
+                searchResult.style.display = "block";
+            });
+
+            searchInput.addEventListener("blur", function (e) {
+                // Check if the next element is part of the search result
+                if (!searchResult.contains(e.relatedTarget)) {
+                    searchResult.style.display = "none";
+                }
+            });
+
+            searchInputContainer.addEventListener("blur", function (e) {
+                // Check if the next element is part of the search result
+                if (!searchResult.contains(e.relatedTarget)) {
+                    searchResult.style.display = "none";
+                }
+            });
+
+            searchInput.addEventListener("input", function () {
+                searchResult.style.display = "block";
+                var valueAppend = document.getElementById("search-value-append");
+                valueAppend.textContent = '"' + searchInput.value + '"';
+                var txt_searchValue = searchInput.value;
+                $.ajax({
+                    url: "courses/search",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ txt_value: txt_searchValue }),
+                    success: function (data) {
+                        console.log("success !");
+                        console.log(data);
+
+                        var searchResultBody = $(".search-result-body");
+                        searchResultBody.empty();
+
+                        if(data.courses.length > 0){
+                            data.courses.forEach(function(course){
+                                var courseDiv = $('<div class="search-result-course">');    
+                                var mt2Div = $('<div class="m-2">').appendTo(courseDiv);
+                                var aImg = $('<a href="/courses/'+course.slug+'" class="a-img text-decoration-none fs-6 d-flex">').appendTo(mt2Div);
+                                $('<img src="'+ course.actualImagePath +'" alt="'+ course.name +'" />').appendTo(aImg);
+                                $('<span class="mb-2">'+ course.name +'</span><br />').appendTo(aImg);
+                                courseDiv.appendTo(searchResultBody);
+                            });
+                        }else{
+                            $('<div><span> No result for "'+txt_searchValue+'" </span></div>').appendTo(searchResultBody);;
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    },
+                });
+            });
+        });
+</script>

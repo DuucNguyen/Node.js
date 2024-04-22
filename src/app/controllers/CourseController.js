@@ -28,26 +28,26 @@ class CourseController {
             name: formData.name,
             description: formData.description,
             imagePath: fileName,
-            videoID: formData.videoID
-         });
+            videoID: formData.videoID,
+        });
         try {
             await newCourse.save();
             res.redirect("/me/stored/courses");
         } catch (error) {
-            if(newCourse.imagePath!=null){
+            if (newCourse.imagePath != null) {
                 removeCourseImage(newCourse.imagePath);
             }
             console.error("Error saving course:", error);
             res.status(500).json({ error: "Error saving course" }); // lam lai
         }
 
-        function removeCourseImage(fileName) { //handle error save new course
-            fs.unlink(path.join(uploadPath, fileName), err=> {
-                if(err) console.error(err);
+        function removeCourseImage(fileName) {
+            //handle error save new course
+            fs.unlink(path.join(uploadPath, fileName), (err) => {
+                if (err) console.error(err);
             });
-        };
+        }
     }
-    
 
     //[GET] /courses/:id/edit
     async edit(req, res, next) {
@@ -112,6 +112,17 @@ class CourseController {
             await Courses.deleteMany({ _id: { $in: req.body.courseIds } }) //delete plugin (soft delete)
                 .then(() => res.redirect("back"))
                 .catch(next);
+        }
+    }
+
+    //[GET /courses/search
+    async searchByAJAX(req, res, next) {
+        let searchValue = req.body.txt_value;
+        try {
+            let courses = await Courses.find({ name: { $regex: searchValue, $options: "i" } });
+            res.json({ courses: courses });
+        } catch (error) {
+            console.log(error);
         }
     }
 }

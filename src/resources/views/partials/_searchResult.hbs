@@ -1,0 +1,14 @@
+<div class="search-result-body">
+    {{#each courses}}
+        <div class="search-result-course">
+            <div class="m-2">
+                <a href="/courses/{{slug}}" class="a-img text-decoration-none fs-6 d-flex">
+                    <img src="{{actualImagePath}}" alt="{{name}}" />
+                    <span class="mb-2">{{name}}</span><br />
+                </a>
+            </div>
+        </div>
+    {{else}}
+        <div><span> No result </span></div>
+    {{/each}}
+</div>

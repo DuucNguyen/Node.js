@@ -15,6 +15,7 @@ const methodOverride = require("method-override");
 const SortMiddleware = require("./app/middlewares/sortMiddleware");
 const route = require("./routes");
 const db = require("./config/db");
+const bodyParser = require('body-parser');
 
 //connect db
 db.connect();
@@ -22,7 +23,7 @@ db.connect();
 const app = express();
 const port = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
-
+app.use(bodyParser.json());
 app.use(
     express.urlencoded({
         extended: true, //express indluded body-parser so indlude this line
@@ -46,7 +47,7 @@ app.engine(
     }),
 ); //set shorthand for handlers file for app to recognize
 handlebars.registerHelper("dateFormat", dateFormat); //register date format helper
-
+handlebars.registerPartial("_searchResult", "{{_searchResult}}");
 app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as html or view part)
 app.set("views", path.join(__dirname, "resources", "views")); //set path to views folder (find the corresponding view and use it as view)
 // console.log(path.join("Path: " + __dirname, "resources/views"));

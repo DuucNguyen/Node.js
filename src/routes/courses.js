@@ -17,6 +17,7 @@ const upload = multer({ //config multer (upload form with file)
     }
 }); 
 router.get("/create", courseController.create);
+router.post("/search", courseController.searchByAJAX);
 router.post("/store",upload.single("imageFile"), courseController.store);
 router.post("/handle-form-action", courseController.handleFormAction);
 router.get("/:id/edit", courseController.edit);

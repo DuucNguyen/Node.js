@@ -21,13 +21,50 @@
         </form>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () { var searchInput =
-    document.getElementById("search-input"); var searchResult =
-    document.getElementById("search-result"); searchInput.addEventListener("focus", function(){
-    searchResult.style.display = "block"; }); searchInput.addEventListener("blur", function(){
-    searchResult.style.display = "none"; }); searchInput.addEventListener("input", function(){ var
-    valueAppend = document.getElementById("search-value-append"); valueAppend.textContent =
-    searchInput.value; }); });
+            document.addEventListener("DOMContentLoaded", function () {
+                var searchInputContainer = document.getElementById("navbar-search");
+                var searchInput = document.getElementById("search-input");
+                var searchResult = document.getElementById("search-result");
+
+                searchInputContainer.addEventListener("focus", function () {
+                    searchResult.style.display = "block";
+                });
+
+                searchInput.addEventListener("blur", function (e) {
+                    // Check if the next element is part of the search result
+                    if (!searchResult.contains(e.relatedTarget)) {
+                        searchResult.style.display = "none";
+                    }
+                });
+
+                searchInputContainer.addEventListener("blur", function (e) {
+                    // Check if the next element is part of the search result
+                    if (!searchResult.contains(e.relatedTarget)) {
+                        searchResult.style.display = "none";
+                    }
+                });
+
+                searchInput.addEventListener("input", function () {
+                    searchResult.style.display = "block";
+                    var valueAppend = document.getElementById("search-value-append");
+                    valueAppend.textContent = '"' + searchInput.value + '"';
+                    var txt_searchValue = searchInput.value;
+                    $.ajax({
+                        url: "courses/search",
+                        method: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({ txt_value: txt_searchValue }),
+                        success: function (data) {
+                            console.log("success !");
+                            console.log(data); // Data received from the server
+                            // Handle data here without changing content
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
         </script>
     </body>
 </html>
