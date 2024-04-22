@@ -38,13 +38,13 @@
   padding: 10px 6px;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .table-head {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
   background-color: white;
 }
 
@@ -247,6 +247,7 @@ button {
   max-height: 600px;
   box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
+  z-index: 1000;
 }
 
 .search-result-course a {

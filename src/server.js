@@ -47,7 +47,11 @@ app.engine(
     }),
 ); //set shorthand for handlers file for app to recognize
 handlebars.registerHelper("dateFormat", dateFormat); //register date format helper
+//register partials
 handlebars.registerPartial("_searchResult", "{{_searchResult}}");
+handlebars.registerPartial("_tableBody", "{{_table_body}}");
+
+
 app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as html or view part)
 app.set("views", path.join(__dirname, "resources", "views")); //set path to views folder (find the corresponding view and use it as view)
 // console.log(path.join("Path: " + __dirname, "resources/views"));

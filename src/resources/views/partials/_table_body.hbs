@@ -1,0 +1,67 @@
+{{#each courses}}
+    <tr>
+        <td>
+            <div>
+                <input
+                    class="form-check-input ms-3"
+                    type="checkbox"
+                    id="checkboxNoLabel"
+                    name="courseIds[]"
+                    value="{{_id}}"
+                    aria-label="..."
+                />
+            </div>
+        </td>
+        <td style="max-width: 200px;">
+            <img
+                style="max-width: 50%;"
+                src="{{actualImagePath}}"
+                alt="{{name}}"
+                class="rounded img-fluid max-width-img"
+            />
+        </td>
+        <td>
+            {{name}}
+        </td>
+        <td>
+            {{dateFormat updatedAt "MMMM Do YYYY, h:mm:ss a"}}
+        </td>
+        <td>
+            <div class="action-container d-flex justify-content-evenly">
+                <a
+                    class="text-decoration-none btn btn-outline-primary"
+                    href="/courses/{{_id}}/edit"
+                >
+                    <span>
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Update
+                    </span>
+                </a>
+                <a
+                    class="text-decoration-none btn btn-outline-danger"
+                    href="/courses/{{_id}}"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-delete-course"
+                    data-bs-whatever="{{_id}}"
+                >
+                    <span>
+                        <i class="fa-regular fa-trash-can"></i>
+                        Move to bin
+                    </span>
+                </a>
+            </div>
+        </td>
+    </tr>
+{{else}}
+    <tr class="text-center">
+        <td colspan="5">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>
+                No course to display
+            </span>
+            <a href="/courses/create">
+                Create a new Course
+            </a>
+        </td>
+    </tr>
+{{/each}}

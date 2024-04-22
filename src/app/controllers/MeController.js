@@ -40,7 +40,11 @@ class MeController {
         let coursesDeletedQuery = await Courses.findDeleted().sortable(req); //mongoose doest not return array imadiately so await ot use map
         let coursesQueryWithVirtual = coursesDeletedQuery.map((course) => course.toObject());
 
-        Promise.all([coursesQueryWithVirtual, Courses.countDocumentsDeleted(), Courses.countDocuments()]) //receive multiple promises
+        Promise.all([
+            coursesQueryWithVirtual,
+            Courses.countDocumentsDeleted(),
+            Courses.countDocuments(),
+        ]) //receive multiple promises
             .then(
                 (
                     [courses, countDeleted, countCourses], //receive array of return values of corresponding promise
@@ -52,6 +56,18 @@ class MeController {
                     }),
             )
             .catch(next);
+    }
+
+    //[GET] me/stored/courses/sort
+    async sortStoredCoursesByAJAX(req, res, next) {
+        try {
+            let coursesQuery = await Courses.find().sortable(req); //using sortable helper in order to re-use method sort
+            let coursesQueryWithVirtual = coursesQuery.map((course) => course.toObject());
+            res.json({courses: coursesQueryWithVirtual});
+
+        } catch (error) {
+            console.log("/me/stored/sort - ERROR : "+ error);
+        }
     }
 }
 

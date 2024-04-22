@@ -31,6 +31,10 @@ CourseSchema.plugin(AutoIncrement); //auto incease _id (default)
 //Custom helper //Mongoose query helper (re-use method)
 CourseSchema.query.sortable = function (req) {
     if (req.query.hasOwnProperty("_sort")) {
+        console.log("Schema-hasOwnProperty(_sort): "+ req.query.hasOwnProperty("_sort"));
+        console.log("Schema-column: "+ req.query.column);
+        console.log("Schema-type: "+ req.query.type);
+
         const isValidType = ["asc", "desc"].includes(req.query.type); //valid req params
         return this.sort({
             [req.query.column]: isValidType ? req.query.type : "desc", //condition : [column name] : order
