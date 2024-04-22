@@ -96,7 +96,7 @@
                 valueAppend.textContent = '"' + searchInput.value + '"';
                 var txt_searchValue = searchInput.value;
                 $.ajax({
-                    url: "courses/search",
+                    url: "/courses/search",
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify({ txt_value: txt_searchValue }),
