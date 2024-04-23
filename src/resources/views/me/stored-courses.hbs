@@ -201,7 +201,7 @@
                     }
                 });
 
-                $(".sort-link").on("click", function(e){
+                {{!-- $(".sort-link").on("",function(e){
                     e.preventDefault();
                     var href = $(this).attr("href");
 
@@ -212,14 +212,27 @@
                         success: function(data){
                             console.log("success !");
                             console.log(data.courses);
+                            var tableBody = $(".table-body");
+                            tableBody.empty();
+                            if(data.courses.length > 0){
+                                data.courses.forEach(function(course){
+                                    var tr = $('<tr>');
+                                    var tdInput = $('<td><div><input class="form-check-input ms-3" type="checkbox" id="checkboxNoLabel" name="courseIds[]" value="'+ course._id +'" aria-label="..."/></div></td>').appendTo(tr);
+                                    var tdImg = $('<td style="max-width: 200px;"><img style="max-width: 50%;" src="'+ course.actualImagePath +'" alt="'+course.name+'" class="rounded img-fluid max-width-img" /></td>').appendTo(tr);
+                                    var tdName = $('<td>'+ course.name +'</td>').appendTo(tr);
+                                    var tdUpdateAt = $('<td>'+ course.updatedAt +'</td>').appendTo(tr);
+                                    var tdLinks = $('<td></td> </tr>').appendTo(tr);
+                                    tr.appendTo(tableBody);
+                                });
+                            }else{
+                                var exeption = $('<tr class="text-center"><td colspan="5"><i class="fa-solid fa-circle-info"></i><span>No course to display</span><a href="/courses/create">Create a new Course</a></td></tr>').appendTo(tableBody);
+                            }
                         },
                         error: function(error){
-
+                            console.log("AJAX-sort: " + error);
                         }
                     });
-
-                });
-
+                }); --}}
 
             });
         </script>

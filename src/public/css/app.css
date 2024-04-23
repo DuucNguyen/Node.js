@@ -140,21 +140,33 @@
   border-radius: 8px !important;
 }
 
+.navbar-action button {
+  text-decoration: none;
+}
+
 .navbar-action-login-btn {
-  color: white;
   background: transparent;
   cursor: pointer;
   margin-right: 30px;
   padding: 9px 20px;
 }
 
+.navbar-action-login-btn a {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar-action-registor-btn {
   background: linear-gradient(to right bottom, #26ff7d, rgba(12, 140, 57, 0.3294117647));
   border-radius: 99px;
-  color: #fff;
   cursor: pointer;
   padding: 9px 20px;
   transition: opacity 0.25s;
+}
+
+.navbar-action-registor-btn a {
+  color: #fff;
+  text-decoration: none;
 }
 
 button {
@@ -287,6 +299,41 @@ button {
 
 .btn-create:hover {
   background: #199b83;
+}
+
+.authentication-main-container {
+  background-color: #127362;
+}
+
+.login-content-img img {
+  width: 100%;
+  height: 100vh;
+}
+
+.login-content-main {
+  background-color: white;
+  padding: 2rem 4rem;
+}
+
+.break-point {
+  position: relative;
+  text-align: center;
+}
+
+.break-point::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #d1d5db; /* Adjust color as needed */
+}
+
+.break-point span {
+  position: relative;
+  background-color: white; /* Ensures the line appears behind the text */
+  padding: 0 10px; /* Add some padding around the text */
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -3,6 +3,7 @@ const newsRoute = require("./news");
 const siteRoute = require("./sites");
 const coursesRoute = require("./courses");
 const meRoute = require("./me");
+const authenticationRoute = require("./authentication");
 
 function route(app) {
     //Action --> Dispatcher --> function handler
@@ -18,6 +19,7 @@ function route(app) {
     app.use("/news", newsRoute);
     app.use("/courses", coursesRoute);
     app.use("/me", meRoute);
+    app.use("/authentication", authenticationRoute);
 
     //   app.get("/search", (req, res) => {
     //     res.render("search");

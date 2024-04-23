@@ -2,11 +2,20 @@ const Handlebars = require("handlebars");
 
 module.exports = {
     sum: (a, b) => a + b,
+    isEqual: (a, b) => {
+        // console.log("show header : " + a);
+        // console.log("value : " + b);
+        // console.log(a===b);
+        return a === b;
+    },
+    not (value){
+        return !value;
+    },
     sortable: (field, sort) => {
         const sortType = field === sort.column ? sort.type : "default"; //seperate icon , actions
 
-        console.log("Helper: sort-column: "+ sort.column);
-        console.log("Helper: sort-type: "+ sort.type);
+        console.log("Helper: sort-column: " + sort.column);
+        console.log("Helper: sort-type: " + sort.type);
 
         const icons = {
             default: "fa-solid fa-sort",
@@ -21,7 +30,6 @@ module.exports = {
 
         const icon = icons[sortType];
         const type = types[sortType];
-
 
         const href = Handlebars.escapeExpression(
             `/me/stored/courses/sort?_sort=true&column=${field}&type=${type}`,

@@ -5,4 +5,5 @@ const siteController = require("../app/controllers/SiteController");
 router.get("/search", siteController.search);
 router.get("/", siteController.home); //defaul url must be last
 
+
 module.exports = router;

@@ -63,8 +63,7 @@ class MeController {
         try {
             let coursesQuery = await Courses.find().sortable(req); //using sortable helper in order to re-use method sort
             let coursesQueryWithVirtual = coursesQuery.map((course) => course.toObject());
-            res.json({courses: coursesQueryWithVirtual});
-
+            res.json({courses: coursesQuery});
         } catch (error) {
             console.log("/me/stored/sort - ERROR : "+ error);
         }
