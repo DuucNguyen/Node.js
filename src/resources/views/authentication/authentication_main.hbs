@@ -1,0 +1,46 @@
+<div class="authentication-main-container d-flex">
+    <div class="authentication-content-img col-lg-6">
+        <img src="img\loginImage.png" alt="" />
+    </div>
+    <div class="authen-content-main col-lg-6">
+        <div class="authen-content-navs col-lg-3 mb-5 d-flex justify-content-between">
+            <span class="chosen_nav" id="login_nav">Sign in</span>
+            <span id="register_nav">Sign up</span>
+        </div>
+        <div id="authen-content-login">
+            {{>_login}}
+        </div>
+        <div style="display: none;" id="authen-content-register">
+            {{>_register}}
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        const login_form = $('#authen-content-login');
+        const register_form = $('#authen-content-register');
+
+        register_form.hide();
+
+        $(document).on("click", "#register_nav", function(){
+            register_form.show();
+            login_form.hide();
+            $("#login_nav").removeClass("chosen-nav"); // Remove the class from the other element
+            $("#register_nav").addClass("chosen-nav");
+        });
+
+        $(document).on("click", "#login_nav", function(){
+            register_form.hide();
+            login_form.show();
+            $("#register_nav").removeClass("chosen-nav"); // Remove the class from the other element
+            $("#login_nav").addClass("chosen-nav");
+        });
+
+        
+    });
+
+
+
+
+
+</script>

@@ -9,21 +9,17 @@ class AuthenticationController {
         const user = await Users.findOne({ username: username, password: password });
         //console.log(user);
         if (!user) {
-            // res.render("./authentication/login", {
-            //     showHeader: false,
-            //     msg: "Username or Password incorrect !",
-            // });
-            req.flash("loginFailed", "Username or Password incorrect!");
-            res.locals.message = req.flash();
+            req.flash("loginFailed", "Incorect Username or Password !");
             res.redirect("back");
         } else {
-            res.redirect("/");
+            req.session.user = user;
+            return res.redirect("/");
         }
     }
 
     //[Get] /
     async authenticationPage(req, res, next) {
-        res.render("./authentication/login", { showHeader: false });
+        res.render("./authentication/authentication_main", { showHeader: false });
     }
 }
 

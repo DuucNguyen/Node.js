@@ -1,0 +1,68 @@
+<div class="authen-content-social-media mb-4">
+    <a class="mb-2 p-3 btn btn-outline-dark col-lg-12" href="#"><i class="fa-brands fa-google"></i>
+        Sign up with Google</a>
+    <a class="mt-2 p-3 btn btn-outline-dark col-lg-12" href="#"><i
+            class="fa-brands fa-facebook"
+        ></i>
+        Sign up with Facebook</a>
+</div>
+<div class="break-point mb-4 col-lg-12">
+    <span>OR EMAIL</span>
+</div>
+<div class="authen-content-email">
+    <form class="row g-3" action="authentication/register" method="POST">
+        <div class="">
+            <label for="validationServer01" class="form-label"><i class="fa-solid fa-user"></i>
+                Username</label>
+            <input
+                type="text"
+                class="form-control is-valid"
+                name="username"
+                id="validationServer01"
+                required
+            />
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="">
+            <label for="validationServer02" class="form-label"><i class="fa-solid fa-lock"></i>
+                Email</label>
+            <input
+                type="text"
+                class="form-control is-valid"
+                name="email"
+                id="validationServer02"
+                required
+            />
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input
+                    class="form-check-input is-invalid"
+                    type="checkbox"
+                    value=""
+                    id="invalidCheck3"
+                    aria-describedby="invalidCheck3Feedback"
+                    required
+                />
+                <label class="form-check-label" for="invalidCheck3">
+                    Agree to terms and conditions
+                </label>
+                <div id="invalidCheck3Feedback" class="invalid-feedback">
+                    You must agree before login.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button style="width: 100%;" class="p-3 btn btn-primary" type="submit">Sign in</button>
+        </div>
+    </form>
+    <div class="col-12">
+        <button style="width: 100%;" class="p-2 btn btn-outline-success" type="submit">Already have
+            an account ? Sign in</button>
+    </div>
+</div>

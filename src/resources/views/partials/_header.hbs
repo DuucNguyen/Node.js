@@ -20,10 +20,20 @@
                 class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto d-flex flex-row-reverse align-items-center"
             >
                 <li class="nav-item ms-5">
-                    <div class="navbar-actions">
-                        <button class="navbar-action-login-btn fw-bold"><a  href="authentication">Sign in</a></button>
-                        <button class="navbar-action-registor-btn fw-bold"><a  href="authentication">Sign up</a></button>
-                    </div>
+                    {{#if session.user.username}}
+                        <div class="navbar-actions">
+                            <div class="navbar-account">
+                                <a href="#">My courses</a>
+                                <span><i class="fa-solid fa-bell"></i></span>
+                                <span>{{session.user.username}}</span>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="navbar-actions">
+                            <button class="navbar-action-login-btn fw-bold"><a  href="authentication">Sign in</a></button>
+                            <button class="navbar-action-registor-btn fw-bold"><a  href="authentication">Sign up</a></button>
+                        </div>
+                    {{/if}}
                 </li>
                 <li class="nav-item me-5">
                     <div class="navbar-search" id="navbar-search" tabindex="0">

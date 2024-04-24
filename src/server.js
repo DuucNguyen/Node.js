@@ -39,11 +39,18 @@ app.use(
         cookie: {
             secure: false, //set true to view in application f12 as dev env
             httpOnly: true,
-            maxAge: 5 * 60 * 1000,
+            maxAge: 30 * 60 * 1000,
         },
     }),
 );
 app.use(flash());
+// Custom middleware to set flash messages
+app.use((req, res, next) => {
+    res.locals.messages = req.flash();
+    res.locals.session = req.session;
+    next();
+});
+
 
 app.use(express.static(path.join(__dirname, "public"))); //set path to use folder public
 app.use(bodyParser.json());
@@ -75,6 +82,9 @@ handlebars.registerHelper("dateFormat", dateFormat); //register date format help
 handlebars.registerPartial("_searchResult", "{{_searchResult}}");
 handlebars.registerPartial("_tableBody", "{{_table_body}}");
 handlebars.registerPartial("_message", "{{_message}}");
+handlebars.registerPartial("_login", "{{_login}}");
+handlebars.registerPartial("_register", "{{_register}}");
+
 
 
 app.set("view engine", "hbs"); //set view as handlerbars (using handlebars as html or view part)
