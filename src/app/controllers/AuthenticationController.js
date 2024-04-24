@@ -6,9 +6,19 @@ const cache = new NodeCache();
 
 //config cache otp
 const length = 10; //length otp
-const expirationTime = 30000; //expiration time
+const expirationTime = 25 * 60 * 1000; //expiration time
 
 class AuthenticationController {
+    //[GET] /authentication/registerPage
+    async registerPage(req, res, next) {
+        res.render("./authentication/register", { showHeader: false });
+    }
+
+    //[Get] /authentication
+    async loginPage(req, res, next) {
+        res.render("./authentication/login", { showHeader: false });
+    }
+
     //[GET] // temp /login
     async login(req, res, next) {
         var username = req.body.username;
@@ -28,7 +38,7 @@ class AuthenticationController {
     //[POST] /auth/sendVerification
     async sendMail(req, res, next) {
         var username = req.body.username;
-        var email = req.body.email;
+        var email = req.body.email; // validate dublicate email
         const otp = generateRandomString(length, expirationTime);
         mailer.sendMail(
             email,
@@ -43,29 +53,44 @@ class AuthenticationController {
                 otp +
                 '" /> <input type="submit" value="verify"/>  <form>',
         );
-        req.flash("msg", "Verification mail send. Pls check your email !");
+        req.flash("successMsg", "Verification mail send. Pls check your email !");
         res.redirect("back");
     }
 
     //[POST] /auth/verifyEmail
     async verifyEmail(req, res, next) {
-        var isValid = verify(req.body.otp);
-        if (isValid) {
-            res.send("Verified - Set Password");
-        } else {
-            req.flash("msg", "Verification expired or internal server error ! Try again");
-            res.redirect("/authentication/registerPage");
+        try {
+            var isValid = verify(req.body.otp);
+            var newUser = req.body;
+            if (isValid) {
+                res.render("./authentication/registerPassword", { newUser, showHeader: false });
+            } else {
+                req.flash("msg", "Verification expired or internal server error ! Try again");
+                res.redirect("/authentication/registerPage");
+            }
+        } catch (error) {
+            console.log("register after verify - error : " + error);
         }
     }
 
-    //[GET] /authentication/registerPage
-    async registerPage(req, res, next) {
-        res.render("./authentication/register", { showHeader: false });
-    }
-
-    //[Get] /authentication
-    async loginPage(req, res, next) {
-        res.render("./authentication/login", { showHeader: false });
+    //[POST] /authentication/registerPassword
+    async registerPassword(req, res, next) {
+        const newUser = new Users({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+        });
+        try {
+            await newUser.save();
+            res.render("./authentication/registerPassword", {
+                newUser: newUser.toObject(),
+                successMsg: "Register account successfully !",
+                showHeader: false,
+            });
+        } catch (error) {
+            console.log("register account - error: " + error);
+            res.status(500).send("An error occurred while registering the user.");
+        }
     }
 }
 function generateRandomString(length, exprirationTime) {

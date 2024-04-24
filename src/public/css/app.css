@@ -352,4 +352,16 @@ button {
   color: #199b83;
 }
 
+.set-password-container {
+  margin: auto;
+  max-width: 45%;
+  padding: 10px 20px;
+  box-shadow: 0 -4px 42px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+}
+
+.register-password-item {
+  margin: 15px 0;
+}
+
 /*# sourceMappingURL=app.css.map */
