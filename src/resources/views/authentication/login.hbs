@@ -1,0 +1,83 @@
+<div class="authentication-main-container d-flex">
+    <div class="authentication-content-img col-lg-6">
+        <img src="img\loginImage.png" alt="" />
+    </div>
+    <div class="authen-content-main col-lg-6">
+        <div class="authen-content-navs col-lg-3 mb-5 d-flex justify-content-between">
+            <a href="/authentication">
+                <span class="chosen_nav" id="login_nav">Sign in</span>
+            </a>
+            <a href="authentication/registerPage">
+                <span id="register_nav">Sign up</span>
+            </a>
+        </div>
+        <div id="authen-content-login">
+            <div class="authen-content-social-media mb-4">
+                <a class="mb-2 p-3 btn btn-outline-dark col-lg-12" href="#"><i
+                        class="fa-brands fa-google"
+                    ></i>
+                    Log in with Google</a>
+                <a class="mt-2 p-3 btn btn-outline-dark col-lg-12" href="#"><i
+                        class="fa-brands fa-facebook"
+                    ></i>
+                    Log in with Facebook</a>
+            </div>
+            <div class="break-point mb-4 col-lg-12">
+                <span>OR EMAIL</span>
+            </div>
+            <div class="authen-content-email">
+                <form class="row g-3" action="authentication/login" method="POST">
+                    <div class="">
+                        <label for="validationServer01" class="form-label"><i
+                                class="fa-solid fa-user"
+                            ></i>
+                            Username</label>
+                        <input
+                            type="text"
+                            class="form-control is-valid"
+                            name="username"
+                            id="validationServer01"
+                            required
+                        />
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="validationServer02" class="form-label"><i
+                                class="fa-solid fa-lock"
+                            ></i>
+                            Password</label>
+                        <input
+                            type="text"
+                            class="form-control is-valid"
+                            name="password"
+                            id="validationServer02"
+                            required
+                        />
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        {{>_message}}
+                    </div>
+                    <div class="col-12">
+                        <button style="width: 100%;" class="p-3 btn btn-primary" type="submit">Sign
+                            in</button>
+                    </div>
+                </form>
+                <div class="col-12">
+                    <button
+                        style="width: 100%;"
+                        class="p-2 btn btn-outline-success"
+                        type="submit"
+                    >Are you new? Create an account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>

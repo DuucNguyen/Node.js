@@ -82,8 +82,6 @@ handlebars.registerHelper("dateFormat", dateFormat); //register date format help
 handlebars.registerPartial("_searchResult", "{{_searchResult}}");
 handlebars.registerPartial("_tableBody", "{{_table_body}}");
 handlebars.registerPartial("_message", "{{_message}}");
-handlebars.registerPartial("_login", "{{_login}}");
-handlebars.registerPartial("_register", "{{_register}}");
 
 
 

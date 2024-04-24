@@ -4,6 +4,10 @@ const router = express.Router();
 const authenticationController = require("../app/controllers/AuthenticationController");
 
 router.post("/login", authenticationController.login);
-router.get("/", authenticationController.authenticationPage);
+router.post("/sendVerification", authenticationController.sendMail);
+router.post("/verifyEmail", authenticationController.verifyEmail);
+
+router.get("/registerPage", authenticationController.registerPage);
+router.get("/", authenticationController.loginPage);
 
 module.exports = router;
