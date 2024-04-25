@@ -5,9 +5,9 @@
     <div class="authen-content-main col-lg-6">
         <div class="authen-content-navs col-lg-3 mb-5 d-flex justify-content-between">
             <a href="/authentication">
-                <span class="chosen_nav" id="login_nav">Sign in</span>
+                <span class="chosen-nav" id="login_nav">Sign in</span>
             </a>
-            <a href="authentication/registerPage">
+            <a href="/authentication/registerPage">
                 <span id="register_nav">Sign up</span>
             </a>
         </div>
@@ -34,12 +34,12 @@
                             Username</label>
                         <input
                             type="text"
-                            class="form-control is-valid"
+                            class="form-control "
                             name="username"
-                            id="validationServer01"
+                            id="username-input"
                             required
                         />
-                        <div class="valid-feedback">
+                        <div style="display: none;" id="username-valid" class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
@@ -50,12 +50,12 @@
                             Password</label>
                         <input
                             type="text"
-                            class="form-control is-valid"
+                            class="form-control "
                             name="password"
-                            id="validationServer02"
+                            id="password-input"
                             required
                         />
-                        <div class="valid-feedback">
+                        <div style="display: none;" id="password-valid" class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         {{>_message}}
                     </div>
                     <div class="col-12">
-                        <button style="width: 100%;" class="p-3 btn btn-primary" type="submit">Sign
+                        <button disabled id="sign-in-btn" style="width: 100%;" class="p-3 btn btn-primary" type="submit">Sign
                             in</button>
                     </div>
                 </form>
@@ -79,5 +79,46 @@
     </div>
 </div>
 <script>
+    document.addEventListener("DOMContentLoaded", function(){
 
+        let usernameLength;
+        let passwordLength;
+
+        var isValid
+
+        $("#username-input").on("input", function(){
+            console.log($(this).val().length);
+            usernameLength=$(this).val().length;
+            isValid = (usernameLength>=6 && passwordLength>=6);
+            console.log(isValid);
+
+            if($(this).val().length >= 6){
+                $("#username-input").addClass("is-valid");
+                $("#username-valid").css("display", "block");
+            }else{
+                $("#username-input").removeClass("is-valid");
+                $("#username-valid").css("display", "none");
+            }
+                $("#sign-in-btn").attr("disabled", !isValid);
+        });
+
+        $("#password-input").on("input", function(){
+            console.log($(this).val().length);
+            passwordLength=$(this).val().length;
+            isValid = (usernameLength>=6 && passwordLength>=6);
+            console.log(isValid);
+
+            if($(this).val().length >= 6){
+                $("#password-input").addClass("is-valid");
+                $("#password-valid").css("display", "block");
+            }else{
+                $("#password-input").removeClass("is-valid");
+                $("#password-valid").css("display", "none");
+            }
+                $("#sign-in-btn").attr("disabled", !isValid);
+        });
+
+         
+                
+    });
 </script>

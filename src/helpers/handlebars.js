@@ -14,8 +14,8 @@ module.exports = {
     sortable: (field, sort) => {
         const sortType = field === sort.column ? sort.type : "default"; //seperate icon , actions
 
-        console.log("Helper: sort-column: " + sort.column);
-        console.log("Helper: sort-type: " + sort.type);
+        // console.log("Helper: sort-column: " + sort.column);
+        // console.log("Helper: sort-type: " + sort.type);
 
         const icons = {
             default: "fa-solid fa-sort",

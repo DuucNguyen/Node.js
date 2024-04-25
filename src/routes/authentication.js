@@ -11,4 +11,5 @@ router.post("/registerPassword", authenticationController.registerPassword);
 router.get("/registerPage", authenticationController.registerPage);
 router.get("/", authenticationController.loginPage);
 
+
 module.exports = router;
