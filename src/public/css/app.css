@@ -276,6 +276,50 @@ button {
   color: white;
 }
 
+.account-avatar {
+  width: 35px;
+  cursor: pointer;
+}
+
+.account-avatar span {
+  margin-right: 18px;
+  margin-left: -25px;
+}
+
+.account-avatar img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.user-wrapper {
+  background: white;
+  width: 250px;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+  position: absolute;
+  z-index: 9999;
+  inset: 0px 0px auto auto;
+  transform: translate3d(-13px, 9px, 0px);
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.2);
+  animation: Tippy-module_fadeIn__2LeID 0.3s ease;
+  transition: transform 0.3s ease-in-out; /* Only transition transform */
+  will-change: opacity, transform; /* Hint browser which properties are likely to change */
+}
+
+.user-wrapper a {
+  text-decoration: none;
+  color: black;
+}
+
+.profile {
+  max-width: 50px;
+}
+
+.profile img {
+  max-width: 100%;
+}
+
 .previewImage {
   background-color: #eaebef;
   width: 350px;

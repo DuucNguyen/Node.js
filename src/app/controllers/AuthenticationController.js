@@ -34,6 +34,11 @@ class AuthenticationController {
             return res.redirect("/");
         }
     }
+    //[GET] /logout
+    async logout(req, res){
+        req.session.user = null;
+        res.redirect("/");
+    }
 
     //[POST] /auth/sendVerification
     async sendMail(req, res, next) {
@@ -79,6 +84,7 @@ class AuthenticationController {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
+            role: "USER",
         });
         try {
             await newUser.save();

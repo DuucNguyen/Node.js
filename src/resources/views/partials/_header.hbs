@@ -20,13 +20,10 @@
                 class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto d-flex flex-row-reverse align-items-center"
             >
                 <li class="nav-item ms-5">
-                    {{#if session.user.username}}
-                        <div class="navbar-actions">
-                            <div class="navbar-account">
-                                <a href="#">My courses</a>
-                                <span><i class="fa-solid fa-bell"></i></span>
-                                <span>{{session.user.username}}</span>
-                            </div>
+                    {{#if session.user}}
+                        <div class="account-avatar dropdown d-flex align-items-center me-4">
+                            <span class=""><i class="fa-solid fa-bell" style="color: #ffffff;"></i></span>
+                            <img  src="\img\default-avatar.jpg" alt="">
                         </div>
                     {{else}}
                         <div class="navbar-actions">
@@ -73,6 +70,22 @@
         </div>
     </div>
 </nav>
+{{!-- modal-account --}}
+<div class="user-wrapper mt-5 d-none">
+    <div class="profile d-flex align-items-center">
+        <img src="\img\default-avatar.jpg" alt="default-avatar">
+        <span class="fs-5 fw-bold">{{session.user.username}}</span>
+    </div>
+    <hr>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item list-group-item-action">My courses</li>
+        <li class="list-group-item list-group-item-action">My blogs</li>
+        <li class="list-group-item list-group-item-action">Compose blog</li>
+        <li class="list-group-item list-group-item-action"><a href="authentication/logout">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+    </ul>
+</div>
+
+
 <script>
         document.addEventListener("DOMContentLoaded", function () {
             var searchInputContainer = document.getElementById("navbar-search");
@@ -135,5 +148,17 @@
                     },
                 });
             });
+
+            $(document).on("click", function(event){
+                if(!$(event.target).closest('.account-avatar').length && !$(event.target).closest('.user-wrapper').length) {
+                    $(".user-wrapper").removeClass("d-block").addClass("d-none");
+                }
+            });
+
+            $(".account-avatar").on("click", function(event){
+                event.stopPropagation(); // Stops event from bubbling up to the document
+                $(".user-wrapper").toggleClass("d-block d-none");
+            });
+
         });
 </script>
