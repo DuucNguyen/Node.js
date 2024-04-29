@@ -5,11 +5,12 @@ const authMiddleware = require("../app/middlewares/authMiddleware");
 
 route.get(
     "/stored/courses",
+    authMiddleware.authUser,
     authMiddleware.authCoursesPage("ADM", "MOD"),
     meController.storedCourses,
 );
 route.get("/stored/courses/sort", meController.storedCourses);
 route.get("/bin/courses", meController.deletedCourses);
 route.get("/stored/news", meController.storedNews);
-route.get("/stored/my-courses", meController.myCoursesPage);
+route.get("/stored/my-courses", authMiddleware.authUser, meController.myCoursesPage);
 module.exports = route;

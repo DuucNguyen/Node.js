@@ -1,4 +1,6 @@
+const { default: mongoose } = require("mongoose");
 const Courses = require("../models/Courses");
+const Users = require("../models/Users");
 class MeController {
     //[GET] me/stored/courses
     async storedCourses(req, res, next) {
@@ -71,7 +73,16 @@ class MeController {
 
     //[GET] /stored/my-courses
     async myCoursesPage(req, res, next) {
-        res.render("./me/my-courses", { showHeader: false });
+        try {
+            const user = req.session.user;
+            let courses = await Courses.find({ _id: { $in: user.courses } });
+            courses = courses.map((course) => course.toObject());
+
+            
+            res.render("./me/my-courses", { courses });
+        } catch (error) {
+            console.log("MeController-my-courses error: " + error);
+        }
     }
 }
 
