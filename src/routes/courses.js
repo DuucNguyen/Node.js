@@ -7,18 +7,27 @@ const uploadPath = path.join("src/public", imageBasePath); //config file dynamic
 const multer = require("multer");
 const { model } = require("mongoose");
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"]; //config acceptable file type as image
-const upload = multer({ //config multer (upload form with file)
+const upload = multer({
+    //config multer (upload form with file)
     dest: uploadPath,
-    fileFilter: (req, file, callback)=>{
-        callback(null, imageMimeTypes.includes(file.mimetype))
+    fileFilter: (req, file, callback) => {
+        callback(null, imageMimeTypes.includes(file.mimetype));
     },
     limits: {
-        fileSize: 10 * 1024 * 1024 // 10MB file size limit
-    }
-}); 
-router.get("/create", courseController.create);
+        fileSize: 10 * 1024 * 1024, // 10MB file size limit
+    },
+});
+
+const authMiddleware = require("../app/middlewares/authMiddleware");
+
+router.get(
+    "/create",
+    authMiddleware.authUser,
+    authMiddleware.authPage(["ADM", "MOD"]),
+    courseController.create,
+);
 router.post("/search", courseController.searchByAJAX);
-router.post("/store",upload.single("imageFile"), courseController.store);
+router.post("/store", upload.single("imageFile"), courseController.store);
 router.post("/handle-form-action", courseController.handleFormAction);
 router.get("/:id/edit", courseController.edit);
 router.patch("/:id/restore", courseController.restoreCourse);

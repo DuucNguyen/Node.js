@@ -13,6 +13,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 
 const SortMiddleware = require("./app/middlewares/sortMiddleware");
+
 const route = require("./routes");
 const db = require("./config/db");
 const bodyParser = require("body-parser");
@@ -64,6 +65,8 @@ app.use(express.json()); //handler data get from js or (XMLHttpRequest, fetch, a
 app.use(methodOverride("_method"));
 
 app.use(SortMiddleware);
+
+
 
 // HTTP logger log the path/port the app is listening
 // app.use(morgan("combined"));

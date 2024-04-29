@@ -63,10 +63,15 @@ class MeController {
         try {
             let coursesQuery = await Courses.find().sortable(req); //using sortable helper in order to re-use method sort
             let coursesQueryWithVirtual = coursesQuery.map((course) => course.toObject());
-            res.json({courses: coursesQuery});
+            res.json({ courses: coursesQuery });
         } catch (error) {
-            console.log("/me/stored/sort - ERROR : "+ error);
+            console.log("/me/stored/sort - ERROR : " + error);
         }
+    }
+
+    //[GET] /stored/my-courses
+    async myCoursesPage(req, res, next) {
+        res.render("./me/my-courses", { showHeader: false });
     }
 }
 
