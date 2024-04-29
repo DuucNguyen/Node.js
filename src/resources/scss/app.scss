@@ -310,7 +310,28 @@ button {
 .btn-create:hover{
     background:#199b83;
 }
+//my-courses
+.add-course{
+    height: 168px;
+    border: 3px dashed #127362;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #127362;
+    text-decoration: none;
+    
+}
+.add-course:hover{
+    color: white;
+    background: #127362;
+}
+.add-course span:nth-child(2){
+    align-items: center;
+    font-size: 35px;
+}
 
+//authentication
 .authentication-main-container {
     // background-image: url(img\loginIMG.png);
     background-color: #127362

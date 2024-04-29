@@ -77,7 +77,6 @@ class MeController {
             const user = req.session.user;
             let courses = await Courses.find({ _id: { $in: user.courses } });
             courses = courses.map((course) => course.toObject());
-
             
             res.render("./me/my-courses", { courses });
         } catch (error) {

@@ -1,26 +1,34 @@
-<h1>My courses - personnal account</h1>
-<div class="d-flex courses-container flex-wrap">
-    {{#each courses}}
-        <div class="course m-1">
-            <div class="m-3">
-                <a href="/courses/{{slug}}" class="a-img text-decoration-none fs-6">
-                    <img src="{{actualImagePath}}" class="mb-2" alt="{{name}}" />
-                    <span class="mb-2">{{name}}</span><br />
-                    <span><i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                        Free</span>
+<div class="m-4 ms-5">
+    <span class="fs-5 m-1">My courses - purchased</span>
+    <hr class="m-1" />
+    <div class="d-flex courses-container flex-wrap">
+        {{#each courses}}
+            <div class="course">
+                <div class="m-4">
+                    <a href="/courses/{{slug}}" class="a-img text-decoration-none fs-6">
+                        <img src="{{actualImagePath}}" class="mb-2" alt="{{name}}" />
+                        <span class="mb-2">{{name}}</span><br />
+                        <span><i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            Purchased</span>
+                    </a>
+                </div>
+            </div>
+        {{else}}
+            <div>
+                <i class="fa-solid fa-circle-info"></i>
+                <span>
+                    No course to display
+                </span>
+                <a href="/courses/create">
+                    Create a new Course
                 </a>
             </div>
-        </div>
-    {{else}}
-        <div>
-            <i class="fa-solid fa-circle-info"></i>
-            <span>
-                No course to display
-            </span>
-            <a href="/courses/create">
-                Create a new Course
+        {{/each}}
+        <div class="m-4">
+            <a class="add-course p-4 fs-5 fw-bold" href="/">
+                <span>Add course</span>
+                <span class="mt-4"><i class="fa-solid fa-plus"></i></span>
             </a>
         </div>
-    {{/each}}
-
+    </div>
 </div>
