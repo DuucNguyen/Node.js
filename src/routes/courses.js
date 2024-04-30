@@ -34,6 +34,7 @@ router.patch("/:id/restore", courseController.restoreCourse);
 router.put("/:id", courseController.updateCourse);
 router.delete("/:id", courseController.deleteCourse);
 router.delete("/:id/force", courseController.deletePermanentCourse);
+router.post("/save", courseController.saveCourse);
 router.get("/:slug", courseController.showDetail);
 
 module.exports = router; //-> Controller -> index

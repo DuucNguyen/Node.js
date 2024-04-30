@@ -1,4 +1,6 @@
 const Courses = require("../models/Courses");
+const Users = require("../models/Users");
+
 const fs = require("fs");
 const path = require("path");
 const imageBasePath = "/uploads/courseImages"; //set path to all upload file image
@@ -9,9 +11,13 @@ class CourseController {
         // console.log(req.body.slug);
         // console.log(req.query.slug);
         // console.log(req.params.slug);
-
-        const course = await Courses.findOne({ slug: req.params.slug }).lean();
-        res.render("./courses/showDetail", { course });
+        try {
+            let course = await Courses.findOne({ slug: req.params.slug });
+            course = course.toObject();
+            res.render("./courses/showDetail", { course });
+        } catch (error) {
+            console.log("Show detail error : " + error);
+        }
     }
 
     //[GET] /courses/create
@@ -123,6 +129,20 @@ class CourseController {
             res.json({ courses: courses });
         } catch (error) {
             console.log(error);
+        }
+    }
+    //[POST] /courses/save
+    async saveCourse(req, res, next) {
+        try {
+            let course_id = req.body.courses_id;
+            course_id = parseInt(course_id);
+            let user = req.session.user;
+            user.courses.push(course_id);
+            await Users.updateOne({ _id: user._id }, { courses: user.courses });
+            req.session.user = user;
+            res.redirect("back");
+        } catch (error) {
+            console.log("Save course error : " + error);
         }
     }
 }
