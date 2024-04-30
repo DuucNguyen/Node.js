@@ -40,5 +40,10 @@ module.exports = {
         </a>`;
         return new Handlebars.SafeString(output);
     },
+    isSaved(courseID, userCourses){
+        // console.log("helper _id: "+ courseID);
+        // console.log("helper user-courses: "+ userCourses);
+        return !userCourses.includes(courseID);
+    }
     
 };

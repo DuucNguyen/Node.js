@@ -12,5 +12,10 @@ route.get(
 route.get("/stored/courses/sort", meController.storedCourses);
 route.get("/bin/courses", meController.deletedCourses);
 route.get("/stored/news", meController.storedNews);
-route.get("/stored/my-courses", authMiddleware.authUser, meController.myCoursesPage);
+route.get(
+    "/stored/my-courses",
+    authMiddleware.authUser,
+    authMiddleware.authPage("STU"),
+    meController.myCoursesPage,
+);
 module.exports = route;

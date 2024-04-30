@@ -12,9 +12,11 @@ class CourseController {
         // console.log(req.query.slug);
         // console.log(req.params.slug);
         try {
+            const user = req.session.user;
+            const userCourses = user.courses;
             let course = await Courses.findOne({ slug: req.params.slug });
             course = course.toObject();
-            res.render("./courses/showDetail", { course });
+            res.render("./courses/showDetail", { course, courseID: course._id, userCourses });
         } catch (error) {
             console.log("Show detail error : " + error);
         }
