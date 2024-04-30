@@ -19,40 +19,55 @@
             <div class="card mt-3" style="width: 18rem;">
                 <img src="{{course.actualImagePath}}" class="card-img-top" alt="{{course.name}}" />
                 <div class="card-body shadow">
-                    <form action="/courses/save" method="post" id="form-save">
-                        <input type="hidden" name="courses_id" value="{{course._id}}" />
-                        <h6 class="card-title fw-bold">{{course.name}}</h6>
-                        <hr>
+                    <h6 class="card-title fw-bold">{{course.name}}</h6>
+                    <hr />
+                    <div class="d-flex">
                         {{#if (isSaved courseID userCourses)}}
-                            {{!-- <button type="submit" class="btn btn-outline-success"><i
-                                    class="fa-regular fa-bookmark"
-                                ></i>
-                            </button> --}}
-                            <span style="color: green;" class="fs-5 bookmark-btn"><i
-                                    class="fa-regular fa-bookmark"
-                                ></i>
-                            </span>
+                            <form action="/courses/save" method="post" id="form-save">
+                                <input type="hidden" name="courses_id" value="{{course._id}}" />
+                                <span style="color: green;" class="me-3 fs-5 bookmark-btn"><i
+                                        class="fa-regular fa-bookmark"
+                                    ></i>
+                                </span>
+                            </form>
                         {{else}}
-                            <span style="color: green;" class="fs-5"><i
-                                    class="fa-solid fa-bookmark"
-                                ></i>
-                            </span>
+                            <form
+                                action="/courses/remove-bookmark"
+                                method="post"
+                                id="form-remove-bookmark"
+                            >
+                                <input type="hidden" name="courses_id" value="{{course._id}}" />
+                                <span style="color: green;" class="me-3 fs-5"><i
+                                        class="fa-solid fa-bookmark remove-bookmark-btn"
+                                    ></i>
+                                </span>
+                            </form>
                         {{/if}}
-                        <span style="color: green;"class="fs-5"><i class="fa-solid fa-share-nodes"></i></span>
-                        <span style="color: green;"class="fs-5"><i class="fa-regular fa-star"></i></span>
-                    </form>
+                        <span style="color: green;" class="me-3 fs-5"><i
+                                class="fa-solid fa-share-nodes"
+                            ></i></span>
+                        <span style="color: green;" class="me-3 fs-5"><i
+                                class="fa-regular fa-star"
+                            ></i></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function(){
-        $(".bookmark-btn").on("click", function(){
-            var result = confirm("Add bookmark to this course ?");
-            if(result){
-                $("#form-save").submit();
-            }
-        });
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+                $(".bookmark-btn").on("click", function () {
+                    var result = confirm("Add bookmark to this course ?");
+                    if (result) {
+                        $("#form-save").submit();
+                    }
+                });
+                $(".remove-bookmark-btn").on("click", function () {
+                    var result = confirm("Remove bookmark from this course ?");
+                    if (result) {
+                        $("#form-remove-bookmark").submit();
+                    }
+                });
+            });
 </script>

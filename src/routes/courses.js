@@ -35,6 +35,8 @@ router.put("/:id", courseController.updateCourse);
 router.delete("/:id", courseController.deleteCourse);
 router.delete("/:id/force", courseController.deletePermanentCourse);
 router.post("/save", courseController.saveCourse);
+router.post("/remove-bookmark", courseController.removeBookmark);
+
 router.get("/:slug", courseController.showDetail);
 
 module.exports = router; //-> Controller -> index

@@ -136,10 +136,25 @@ class CourseController {
     //[POST] /courses/save
     async saveCourse(req, res, next) {
         try {
-            let course_id = req.body.courses_id;
-            course_id = parseInt(course_id);
+            const course_id = parseInt(req.body.courses_id);
+
             let user = req.session.user;
             user.courses.push(course_id);
+            await Users.updateOne({ _id: user._id }, { courses: user.courses });
+            req.session.user = user;
+            res.redirect("back");
+        } catch (error) {
+            console.log("Save course error : " + error);
+        }
+    }
+    //[POST] /courses/remove-bookmark
+    async removeBookmark(req, res, next) {
+        try {
+            const course_id = parseInt(req.body.courses_id);
+            let user = req.session.user;
+            
+            let newCourse = user.courses.filter((x) => x !== course_id);
+            user.courses = newCourse;
             await Users.updateOne({ _id: user._id }, { courses: user.courses });
             req.session.user = user;
             res.redirect("back");

@@ -22,47 +22,17 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                var searchInputContainer = document.getElementById("navbar-search");
-                var searchInput = document.getElementById("search-input");
-                var searchResult = document.getElementById("search-result");
-
-                searchInputContainer.addEventListener("focus", function () {
-                    searchResult.style.display = "block";
-                });
-
-                searchInput.addEventListener("blur", function (e) {
-                    // Check if the next element is part of the search result
-                    if (!searchResult.contains(e.relatedTarget)) {
-                        searchResult.style.display = "none";
+                $(".bookmark-btn").on("click", function () {
+                    var result = confirm("Add bookmark to this course ?");
+                    if (result) {
+                        $("#form-save").submit();
                     }
                 });
-
-                searchInputContainer.addEventListener("blur", function (e) {
-                    // Check if the next element is part of the search result
-                    if (!searchResult.contains(e.relatedTarget)) {
-                        searchResult.style.display = "none";
+                $(".form-remove-bookmark").on("click", function () {
+                    var result = confirm("Remove bookmark from this course ?");
+                    if (result) {
+                        $("#form-remove-bookmark").submit();
                     }
-                });
-
-                searchInput.addEventListener("input", function () {
-                    searchResult.style.display = "block";
-                    var valueAppend = document.getElementById("search-value-append");
-                    valueAppend.textContent = '"' + searchInput.value + '"';
-                    var txt_searchValue = searchInput.value;
-                    $.ajax({
-                        url: "courses/search",
-                        method: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify({ txt_value: txt_searchValue }),
-                        success: function (data) {
-                            console.log("success !");
-                            console.log(data); // Data received from the server
-                            // Handle data here without changing content
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        },
-                    });
                 });
             });
         </script>
