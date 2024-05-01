@@ -3,7 +3,8 @@ const slug = require("mongoose-slug-updater");
 const mongoose_delete = require("mongoose-delete");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 const path = require("path");
-const imageBasePath = "/uploads/courseImages"; //set path to all uploaded file image 
+const { type } = require("os");
+const imageBasePath = "/uploads/courseImages"; //set path to all uploaded file image
 
 const CourseSchema = new mongoose.Schema(
     {
@@ -13,7 +14,13 @@ const CourseSchema = new mongoose.Schema(
         imagePath: { type: String, maxLength: 255, required: true },
         videoID: { type: String, maxLength: 255, required: true },
         slug: { type: String, slug: "name", unique: true },
+        values: { type: [String] },
+        price: { type: String },
         level: { type: String },
+        numberOfVideos: {type: Number},
+        totalHour: {type: Number},
+
+
         // createdDate: { type: Date, default: Date.now },
         // updatedDate: { type: Date, default: Date.now }, -> { timestamps: true },
     },
@@ -24,7 +31,6 @@ const CourseSchema = new mongoose.Schema(
         toJSON: { virtuals: true },
     },
 );
-
 
 CourseSchema.plugin(AutoIncrement); //auto incease _id (default)
 
@@ -46,7 +52,7 @@ CourseSchema.query.sortable = function (req) {
 CourseSchema.virtual("actualImagePath").get(function () {
     if (this.imagePath != null) {
         return path.join(imageBasePath, this.imagePath);
-    }else{
+    } else {
         return null;
     }
 });

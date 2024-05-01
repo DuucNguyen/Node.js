@@ -140,6 +140,43 @@
   border-radius: 8px !important;
 }
 
+.course-register-btn {
+  color: white;
+  background: linear-gradient(to right bottom, #22d768, #0b883b);
+  border-radius: 99px;
+  cursor: pointer;
+  padding: 9px 20px;
+  transition: transform 0.2s ease-in-out;
+  padding: 10px 60px;
+}
+
+.course-register-btn:hover {
+  transform: translateY(-5px);
+}
+
+iframe {
+  border-radius: 25px;
+}
+
+.course-value li {
+  flex-basis: 50%;
+  line-height: 2em;
+}
+
+.course-infor p {
+  margin-bottom: 0;
+}
+
+.course-infor span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.course-infor i {
+  margin-right: 14px;
+  font-size: small;
+}
+
 .navbar-action button {
   text-decoration: none;
 }

@@ -19,6 +19,7 @@ const upload = multer({
 });
 
 const authMiddleware = require("../app/middlewares/authMiddleware");
+const navigatorMiddleware = require("../app/middlewares/navigatorMiddleware");
 
 router.get(
     "/create",
@@ -26,6 +27,7 @@ router.get(
     authMiddleware.authPage(["ADM", "MOD"]),
     courseController.create,
 );
+router.get("/learning/:slug", courseController.learningPage);
 router.post("/search", courseController.searchByAJAX);
 router.post("/store", upload.single("imageFile"), courseController.store);
 router.post("/handle-form-action", courseController.handleFormAction);
@@ -36,7 +38,6 @@ router.delete("/:id", courseController.deleteCourse);
 router.delete("/:id/force", courseController.deletePermanentCourse);
 router.post("/save", courseController.saveCourse);
 router.post("/remove-bookmark", courseController.removeBookmark);
-
-router.get("/:slug", courseController.showDetail);
+router.get("/:slug", navigatorMiddleware.courseNav(), courseController.showDetail);
 
 module.exports = router; //-> Controller -> index

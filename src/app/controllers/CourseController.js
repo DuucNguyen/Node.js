@@ -12,13 +12,25 @@ class CourseController {
         // console.log(req.query.slug);
         // console.log(req.params.slug);
         try {
-            const user = req.session.user;
-            const userCourses = user.courses;
+            // const user = req.session.user;
+            // const userCourses = user.courses;
             let course = await Courses.findOne({ slug: req.params.slug });
             course = course.toObject();
-            res.render("./courses/showDetail", { course, courseID: course._id, userCourses });
+            let courseValues = course.values;
+            // res.render("./courses/showDetail", { course, courseID: course._id, userCourses });
+            res.render("./courses/showDetail", { course, courseValues });
+
         } catch (error) {
             console.log("Show detail error : " + error);
+        }
+    }
+    //[GET] /courses/learning/:slug
+    async learningPage(req, res, next) {
+        try {
+            const course = await Courses.find({ slug: req.params.slug });
+            res.render("./courses/learning", { showHeader: false, course });
+        } catch (error) {
+            console.log("learningPage error : " + error);
         }
     }
 
@@ -152,7 +164,7 @@ class CourseController {
         try {
             const course_id = parseInt(req.body.courses_id);
             let user = req.session.user;
-            
+
             let newCourse = user.courses.filter((x) => x !== course_id);
             user.courses = newCourse;
             await Users.updateOne({ _id: user._id }, { courses: user.courses });

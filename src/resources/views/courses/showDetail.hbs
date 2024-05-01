@@ -1,12 +1,27 @@
 <div class="mt-5">
-    <div class="container row">
+    <div class="m-auto container row">
+        <div class="mt-4 col-md-8 col-left">
+            <div class="mb-5 course-introduction">
+                <h2 class="mb-3 fs-2 fw-bold">{{course.name}}</h2>
+                <p>{{course.description}}</p>
+            </div>
+            <div class="course-knowledge">
+                <h4 class="fw-bold mb-4">What will you gain ? </h4>
 
-        <div class="col-md-9 col-left">
-            <h2>{{course.name}}</h2>
-            <p>{{course.description}}</p>
+                <ul class="course-value d-flex flex-wrap" style="list-style: none; padding: 0px;">
+                    {{#each course.values}}
+                        <li><i class="me-2 fa-solid fa-check" style="color: #0ebe1a;"></i>
+                            {{this}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="m-auto col-md-4 col-right">
             <iframe
-                width="560"
-                height="315"
+                class="m-auto"
+                width="460"
+                height="280"
                 src="https://www.youtube.com/embed/{{course.videoID}}?si=6iOHmFmHPoQZbIjg"
                 title="YouTube video player"
                 frameborder="0"
@@ -14,60 +29,28 @@
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
             ></iframe>
-        </div>
-        <div class="col-md-3 col-right">
-            <div class="card mt-3" style="width: 18rem;">
-                <img src="{{course.actualImagePath}}" class="card-img-top" alt="{{course.name}}" />
-                <div class="card-body shadow">
-                    <h6 class="card-title fw-bold">{{course.name}}</h6>
-                    <hr />
-                    <div class="d-flex">
-                        {{#if (isSaved courseID userCourses)}}
-                            <form action="/courses/save" method="post" id="form-save">
-                                <input type="hidden" name="courses_id" value="{{course._id}}" />
-                                <span style="color: green;" class="me-3 fs-5 bookmark-btn"><i
-                                        class="fa-regular fa-bookmark"
-                                    ></i>
-                                </span>
-                            </form>
-                        {{else}}
-                            <form
-                                action="/courses/remove-bookmark"
-                                method="post"
-                                id="form-remove-bookmark"
-                            >
-                                <input type="hidden" name="courses_id" value="{{course._id}}" />
-                                <span style="color: green;" class="me-3 fs-5"><i
-                                        class="fa-solid fa-bookmark remove-bookmark-btn"
-                                    ></i>
-                                </span>
-                            </form>
-                        {{/if}}
-                        <span style="color: green;" class="me-3 fs-5"><i
-                                class="fa-solid fa-share-nodes"
-                            ></i></span>
-                        <span style="color: green;" class="me-3 fs-5"><i
-                                class="fa-regular fa-star"
-                            ></i></span>
-                    </div>
-                </div>
+            <div class="d-flex flex-column course-infor">
+                <form
+                    action="/courses/save"
+                    method="post"
+                    id="form-save"
+                    class="form-save text-center"
+                >
+                    <input type="hidden" name="courses_id" value="{{course._id}}" />
+                    <button class="mt-3 course-register-btn">Register</button>
+                </form>
+                <p><i class="fa-solid fa-money-bill"></i> Price: <span>{{course.price}}</span></p>
+                <p><i class="fa-solid fa-graduation-cap"></i> Level: <span>{{course.level}}</span></p>
+                <p><i class="fa-solid fa-film"></i> Videos: <span>{{course.numberOfVideos}}</span></p>
+                <p><i class="fa-solid fa-clock"></i> Total Hours: <span>{{course.totalHours}}</span></p>
             </div>
         </div>
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-                $(".bookmark-btn").on("click", function () {
-                    var result = confirm("Add bookmark to this course ?");
-                    if (result) {
-                        $("#form-save").submit();
-                    }
-                });
-                $(".remove-bookmark-btn").on("click", function () {
-                    var result = confirm("Remove bookmark from this course ?");
-                    if (result) {
-                        $("#form-remove-bookmark").submit();
-                    }
-                });
-            });
+    document.addEventListener("DOMContentLoaded", function () { $(".bookmark-btn").on("click",
+    function () { var result = confirm("Add bookmark to this course ?"); if (result) {
+    $("#form-save").submit(); } }); $(".remove-bookmark-btn").on("click", function () { var result =
+    confirm("Remove bookmark from this course ?"); if (result) {
+    $("#form-remove-bookmark").submit(); } }); });
 </script>
