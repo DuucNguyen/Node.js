@@ -130,9 +130,8 @@ body {
     background: linear-gradient(to right bottom, #22d768, #0b883b);
     border-radius: 99px;
     cursor: pointer;
-    padding: 9px 20px;
     transition: transform 0.2s ease-in-out;
-    padding: 10px 60px;
+    padding: 10px 85px;
 }
 .course-register-btn:hover{
     transform: translateY(-5px);
@@ -145,8 +144,10 @@ iframe{
     line-height: 2em;
 }
 .course-infor{
+    align-items: center;
 }
 .course-infor p{
+    width: 200px;
     margin-bottom: 0;
 }
 .course-infor span{
@@ -156,6 +157,10 @@ iframe{
 .course-infor i{
     margin-right: 14px;
     font-size: small;
+}
+.course-requirement li{
+    flex-basis: 100%;
+    line-height: 2em;
 }
 
 

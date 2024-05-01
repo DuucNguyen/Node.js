@@ -36,7 +36,7 @@ router.patch("/:id/restore", courseController.restoreCourse);
 router.put("/:id", courseController.updateCourse);
 router.delete("/:id", courseController.deleteCourse);
 router.delete("/:id/force", courseController.deletePermanentCourse);
-router.post("/save", courseController.saveCourse);
+router.post("/save", authMiddleware.authUser, courseController.saveCourse);
 router.post("/remove-bookmark", courseController.removeBookmark);
 router.get("/:slug", navigatorMiddleware.courseNav(), courseController.showDetail);
 

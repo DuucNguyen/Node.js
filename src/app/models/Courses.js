@@ -17,9 +17,9 @@ const CourseSchema = new mongoose.Schema(
         values: { type: [String] },
         price: { type: String },
         level: { type: String },
-        numberOfVideos: {type: Number},
-        totalHour: {type: Number},
-
+        numberOfVideos: { type: Number },
+        totalHour: { type: Number },
+        requirements: { type: [String] },
 
         // createdDate: { type: Date, default: Date.now },
         // updatedDate: { type: Date, default: Date.now }, -> { timestamps: true },

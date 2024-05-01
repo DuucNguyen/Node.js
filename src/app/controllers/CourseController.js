@@ -149,14 +149,13 @@ class CourseController {
     async saveCourse(req, res, next) {
         try {
             const course_id = parseInt(req.body.courses_id);
-
             let user = req.session.user;
             user.courses.push(course_id);
             await Users.updateOne({ _id: user._id }, { courses: user.courses });
             req.session.user = user;
             res.redirect("back");
         } catch (error) {
-            console.log("Save course error : " + error);
+            console.log("Register course error : " + error);
         }
     }
     //[POST] /courses/remove-bookmark
@@ -171,7 +170,7 @@ class CourseController {
             req.session.user = user;
             res.redirect("back");
         } catch (error) {
-            console.log("Save course error : " + error);
+            console.log("Register course error : " + error);
         }
     }
 }
