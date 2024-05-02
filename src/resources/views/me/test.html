@@ -21,18 +21,26 @@
         </form>
 
         <script>
+            document.getElementById("imageInput").addEventListener("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var previewImage = document.getElementById("previewImage");
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            });
             document.addEventListener("DOMContentLoaded", function () {
-                $(".bookmark-btn").on("click", function () {
-                    var result = confirm("Add bookmark to this course ?");
-                    if (result) {
-                        $("#form-save").submit();
-                    }
+                var courseValues = $(".values");
+                var valueItem = $("#value-item").html();
+                $("#add-value-btn").on("click", function () {
+                    courseValues.append("<li>" + valueItem + "</li>");
                 });
-                $(".form-remove-bookmark").on("click", function () {
-                    var result = confirm("Remove bookmark from this course ?");
-                    if (result) {
-                        $("#form-remove-bookmark").submit();
-                    }
+                var courseRequirements = $(".requirements");
+                var requirementItem = $("#requirement-item").html();
+                $("#add-requirement-btn").on("click", function () {
+                    courseRequirements.append("<li>" + requirementItem + "</li>");
                 });
             });
         </script>

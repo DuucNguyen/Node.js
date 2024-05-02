@@ -1,11 +1,15 @@
 <div class="mt-5">
     <div class="container mt-5">
-        <h2>Create new Course</h2>
-        <form method="post" action="/courses/store" enctype="multipart/form-data">
+        <div class="d-flex justify-content-between">
+            <h2>Create new Course</h2>
+            <button type="submit" class="btn-create"><i class="fa-solid fa-plus"></i>
+                Create new course</button>
+        </div>
+        <form class="form-create" method="post" action="/courses/store" enctype="multipart/form-data">
             <div class="form-group mb-3 d-flex justify-content-between">
                 <div class="form-input-infor">
                     <div class="form-input-infor-name">
-                        <label for="name">Name:</label>
+                        <label for="name">Name</label>
                         <input
                             type="text"
                             class="form-control"
@@ -15,7 +19,7 @@
                         />
                     </div>
                     <div class="mt-2 form-input-infor-description">
-                        <label for="description">Description:</label>
+                        <label for="description">Description</label>
                         <textarea
                             type="text"
                             class="form-control"
@@ -27,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-input-img">
-                    <label for="image">Image:</label>
+                    <label for="image">Image</label>
                     <input
                         type="file"
                         class="form-control"
@@ -37,11 +41,16 @@
                         placeholder="Enter image URL"
                     />
                     <label for="" class="mt-2">Preview Image</label>
-                    <img class="previewImage" id="previewImage" src="\img\previewImage.png" style="display: block; " />
+                    <img
+                        class="previewImage"
+                        id="previewImage"
+                        src="\img\previewImage.png"
+                        style="display: block; "
+                    />
                 </div>
             </div>
             <div class="form-input-infor form-group mb-3">
-                <label for="videoID">Video ID:</label>
+                <label for="videoID">Video ID</label>
                 <input
                     type="text"
                     class="form-control"
@@ -50,7 +59,58 @@
                     placeholder="Enter video ID"
                 />
             </div>
-            <button type="submit" class="btn-create"><i class="fa-solid fa-plus"></i> Create new course</button>
+            <div class="course-rv d-flex justify-content-between">
+                <div class="course-values-create">
+                    <span>Course Values</span>
+                    <ul class="values">
+                        <li id="value-item"><div class="input-group input-group-sm mb-3">
+                                <span
+                                    onclick="remove(this)"
+                                    class="input-group-text remove-rv"
+                                    id="inputGroup-sizing-sm"
+                                ><i class="fa-solid fa-minus fa-xl"></i></span>
+                                <input
+                                    name="courseValues"
+                                    type="text"
+                                    class="form-control"
+                                    aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-sm"
+                                />
+                            </div></li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="add-li-btn" id="add-value-btn"><i
+                                class="fa-solid fa-circle-plus"
+                            ></i></span>
+                    </div>
+                </div>
+                <div class="course-requirements-create">
+                    <span>Requirements</span>
+                    <ul class="requirements">
+                        <li id="requirement-item"><div class="input-group input-group-sm mb-3">
+                                <span
+                                    onclick="remove(this)"
+                                    class="input-group-text remove-rv"
+                                    id="inputGroup-sizing-sm"
+                                ><i class="fa-solid fa-minus fa-xl"></i></span>
+                                <input
+                                    name="courseRequirements"
+                                    type="text"
+                                    class="form-control"
+                                    aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-sm"
+                                />
+                            </div></li>
+
+                    </ul>
+                    <div class="text-center">
+                        <span class="add-li-btn" id="add-requirement-btn"><i
+                                class="fa-solid fa-circle-plus"
+                            ></i></span>
+                    </div>
+                </div>
+            </div>
+
         </form>
     </div>
 </div>
@@ -58,13 +118,30 @@
     document.getElementById("imageInput").addEventListener("change", function (event) {
                 var file = event.target.files[0];
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     var previewImage = document.getElementById("previewImage");
                     previewImage.src = e.target.result;
                     previewImage.style.display = "block";
                 };
-
                 reader.readAsDataURL(file);
             });
+            document.addEventListener("DOMContentLoaded", function () {
+                var courseValues = $(".values");
+                var valueItem = $("#value-item").html();
+                $("#add-value-btn").on("click", function () {
+                    courseValues.append("<li>" + valueItem + "</li>");
+                });
+                var courseRequirements = $(".requirements");
+                var requirementItem = $("#requirement-item").html();
+                $("#add-requirement-btn").on("click", function () {
+                    courseRequirements.append("<li>" + requirementItem + "</li>");
+                });
+
+                $(".btn-create").on("click", function(){
+                    $(".form-create").submit();
+                });
+            });
+            function remove(item){
+                $(item).parent().remove();
+            }
 </script>

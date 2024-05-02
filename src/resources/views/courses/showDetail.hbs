@@ -7,7 +7,7 @@
             </div>
             <div class="mb-5 course-knowledge">
                 <h4 class="mb-4 fw-bold">What will you gain ? </h4>
-                <ul class="course-value d-flex flex-wrap" style="list-style: none; padding: 0px;">
+                <ul class="course-value-details d-flex flex-wrap" style="list-style: none; padding: 0px;">
                     {{#each course.values}}
                         <li><i class="me-2 fa-solid fa-check" style="color: #0ebe1a;"></i>
                             {{this}}
@@ -17,7 +17,7 @@
             </div>
             <div class="course-requirements">
                 <h4 class="fw-bold mb-4">Requirements</h4>
-                <ul class="course-requirement d-flex flex-wrap" style="list-style: none; padding: 0px;">
+                <ul class="course-requirement-details d-flex flex-wrap" style="list-style: none; padding: 0px;">
                     {{#each course.requirements}}
                         <li><i class="me-2 fa-solid fa-check" style="color: #0ebe1a;"></i>
                             {{this}}
@@ -38,7 +38,7 @@
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
             ></iframe>
-            <div class="d-flex flex-column course-infor">
+            <div class="d-flex flex-column course-infor-details">
                 <form
                     action="/courses/save"
                     method="post"

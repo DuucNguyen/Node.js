@@ -19,7 +19,6 @@ class CourseController {
             let courseValues = course.values;
             // res.render("./courses/showDetail", { course, courseID: course._id, userCourses });
             res.render("./courses/showDetail", { course, courseValues });
-
         } catch (error) {
             console.log("Show detail error : " + error);
         }
@@ -49,6 +48,8 @@ class CourseController {
             description: formData.description,
             imagePath: fileName,
             videoID: formData.videoID,
+            values: formData.courseValues,
+            requirements: formData.courseRequirements,
         });
         try {
             await newCourse.save();

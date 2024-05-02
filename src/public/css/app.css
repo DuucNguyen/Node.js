@@ -157,31 +157,31 @@ iframe {
   border-radius: 25px;
 }
 
-.course-value li {
+.course-value-details li {
   flex-basis: 50%;
   line-height: 2em;
 }
 
-.course-infor {
+.course-infor-details {
   align-items: center;
 }
 
-.course-infor p {
+.course-infor-details p {
   width: 200px;
   margin-bottom: 0;
 }
 
-.course-infor span {
+.course-infor-details span {
   font-size: 18px;
   font-weight: 500;
 }
 
-.course-infor i {
+.course-infor-details i {
   margin-right: 14px;
   font-size: small;
 }
 
-.course-requirement li {
+.course-requirement-details li {
   flex-basis: 100%;
   line-height: 2em;
 }
@@ -393,6 +393,35 @@ button {
 
 .btn-create:hover {
   background: #199b83;
+}
+
+.values,
+.requirements {
+  padding: 0;
+  list-style: none;
+}
+
+.course-values-create {
+  width: 50%;
+}
+
+.course-requirements-create {
+  width: 40%;
+}
+
+.add-li-btn {
+  color: #127362;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.add-li-btn:hover {
+  color: #0b883b;
+}
+
+.remove-rv {
+  cursor: pointer;
+  color: red;
 }
 
 .add-course {
